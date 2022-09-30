@@ -621,6 +621,7 @@ function lib:Main()
 			_1.Font = Enum.Font.TitilliumWeb
 			_1.TextColor3 = Color3.fromRGB(255, 255, 255)
 			_1.TextScaled = true
+			_1.Text = tostring(c_title)
 			_1.TextSize = 14.000
 			_1.TextWrapped = true
 			_1.MouseButton1Click:Connect(function()

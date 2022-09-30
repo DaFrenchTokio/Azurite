@@ -149,6 +149,9 @@ function lib:Main()
 	mn.Base.Position = UDim2.new(0.5, 0, 0.5, 0)
 	mn.Base.Size = UDim2.new(0, 600, 0, 350)
 	mn.Base.Visible = false
+	mn.Base.Selectable = true
+	mn.Base.Active = true
+	mn.Base.Draggable = true
 
     mn.UIStroke_1.Parent = mn.Base
     mn.UIStroke_1.Name = "Stroke"
@@ -593,6 +596,18 @@ function lib:Main()
 	end
 	
 	--
+	function mn:BaseKey(keyname)
+		game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(key)
+            if key:lower() == keyname then
+                if mn.Base.Visible == false then
+                    mn.Base.Visible = true
+				end
+                if mn.Base.Visible == true then
+                    mn.Base.Visible = false
+                end
+            end
+        end)
+	end
 	function mn:Category(c_title)
 		local number = 0
 		for _,v in pairs(mn.Objects:GetChildren()) do

@@ -659,7 +659,9 @@ function lib:Main()
 					end
 				end
 			end)
-			
+			for _,v in pairs(mn.Objects:GetChildren()) do
+				mn._436c6f736543617465676f7279(v)
+			end
 			table.insert(mn.table_category, _1.Name)
 			
 			function cmn:Button(c_title,caller)
@@ -952,9 +954,6 @@ function lib:Main()
 			end
 			return cmn
 		end
-	end
-	for _,v in pairs(mn.Objects:GetChildren()) do
-		mn._436c6f736543617465676f7279(v)
 	end
 	mn.Base.Visible = true
 	return mn

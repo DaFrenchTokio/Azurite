@@ -701,7 +701,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextSize = 14.000
+				cpar.Title.TextSize = 20
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
 				cpar.Title.Text = tostring(c_title)
@@ -784,7 +784,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextSize = 17
+				cpar.Title.TextSize = 20
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -880,7 +880,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextSize = 17
+				cpar.Title.TextSize = 20
 				cpar.Title.Text = tostring(c_title)
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left

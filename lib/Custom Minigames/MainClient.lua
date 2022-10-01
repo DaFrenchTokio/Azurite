@@ -1,34 +1,34 @@
 -- Decompiled with the Synapse X Luau decompiler.
 
-local Debris = game:GetService("Debris");
-local TweenService = game:GetService("TweenService");
-local Players = game:GetService("Players");
-local ReplicatedStorage = game:GetService("ReplicatedStorage");
-local MarketplaceService = game:GetService("MarketplaceService");
-local UserInputService = game:GetService("UserInputService");
-local HttpService = game:GetService("HttpService");
-local SoundService = game:GetService("SoundService");
-local Workspace = game:GetService("Workspace");
-local LocalPlayer = game.Players.LocalPlayer;
-local VIPRoom = Workspace:WaitForChild("VIPRoom");
-local WaitingRoom = Workspace:WaitForChild("WaitingRoom");
-local TouchPart = WaitingRoom:WaitForChild("DonationArea"):WaitForChild("Booth"):WaitForChild("TouchPart");
-local PlayerScripts = LocalPlayer:WaitForChild("PlayerScripts");
-local LocalScript = PlayerScripts:WaitForChild("LocalScript");
-local Modules = game:GetService("ReplicatedFirst"):WaitForChild("Modules");
-local Events = ReplicatedStorage:WaitForChild("Events");
-local PingCounts = ReplicatedStorage:WaitForChild("PingCounts");
-local Trades = ReplicatedStorage:WaitForChild("Trades");
-local RemoteEvent = Events:WaitForChild("RemoteEvent");
-local RemoteFunction = Events:WaitForChild("RemoteFunction");
-local AdminList = require(Modules:WaitForChild("AdminList"));
-local MinigameData = require(Modules:WaitForChild("MinigameData"));
-local TagAppearance = require(Modules:WaitForChild("TagAppearance"));
-local RunService = game:GetService("RunService");
-local HB = RemoteEvent:WaitForChild("HB");
+local l__Debris__1 = game:GetService("Debris");
+local l__TweenService__2 = game:GetService("TweenService");
+local l__Players__3 = game:GetService("Players");
+local l__ReplicatedStorage__4 = game:GetService("ReplicatedStorage");
+local l__MarketplaceService__5 = game:GetService("MarketplaceService");
+local l__UserInputService__6 = game:GetService("UserInputService");
+local l__HttpService__7 = game:GetService("HttpService");
+local l__SoundService__8 = game:GetService("SoundService");
+local l__Workspace__9 = game:GetService("Workspace");
+local l__LocalPlayer__10 = l__Players__3.LocalPlayer;
+local l__VIPRoom__11 = l__Workspace__9:WaitForChild("VIPRoom");
+local l__WaitingRoom__12 = l__Workspace__9:WaitForChild("WaitingRoom");
+local l__TouchPart__13 = l__WaitingRoom__12:WaitForChild("DonationArea"):WaitForChild("Booth"):WaitForChild("TouchPart");
+local l__PlayerScripts__14 = l__LocalPlayer__10:WaitForChild("PlayerScripts");
+local l__LocalScript__15 = l__PlayerScripts__14:WaitForChild("LocalScript");
+local l__Modules__16 = game:GetService("ReplicatedFirst"):WaitForChild("Modules");
+local l__Events__17 = l__ReplicatedStorage__4:WaitForChild("Events");
+local l__PingCounts__18 = l__ReplicatedStorage__4:WaitForChild("PingCounts");
+local l__Trades__19 = l__ReplicatedStorage__4:WaitForChild("Trades");
+local l__RemoteEvent__20 = l__Events__17:WaitForChild("RemoteEvent");
+local l__RemoteFunction__21 = l__Events__17:WaitForChild("RemoteFunction");
+local v22 = require(l__Modules__16:WaitForChild("AdminList"));
+local v23 = require(l__Modules__16:WaitForChild("MinigameData"));
+local v24 = require(l__Modules__16:WaitForChild("TagAppearance"));
+local l__RunService__1 = game:GetService("RunService");
+local l__HB__2 = l__RemoteEvent__20:WaitForChild("HB");
 updateServerHitboxes = coroutine.create(function()
-	RunService.Heartbeat:Connect(function()
-		if HB.Value == false then
+	l__RunService__1.Heartbeat:Connect(function()
+		if l__HB__2.Value == false then
 			coroutine.yield();
 		end;
 		local v25 = {};
@@ -40,7 +40,7 @@ updateServerHitboxes = coroutine.create(function()
 			["Left Leg"] = true, 
 			["Right Leg"] = true
 		};
-		local v27, v28, v29 = pairs((LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()):GetChildren());
+		local v27, v28, v29 = pairs((l__LocalPlayer__10.Character or l__LocalPlayer__10.CharacterAdded:Wait()):GetChildren());
 		while true do
 			local v30, v31 = v27(v28, v29);
 			if v30 then
@@ -53,13 +53,13 @@ updateServerHitboxes = coroutine.create(function()
 				v25[v31.Name] = v31.CFrame;
 			end;		
 		end;
-		RemoteEvent:FireServer("UpdateHitbox", v25);
+		l__RemoteEvent__20:FireServer("UpdateHitbox", v25);
 	end);
 end);
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui");
+local l__PlayerGui__3 = l__LocalPlayer__10:WaitForChild("PlayerGui");
 local u4 = { "Info", "Inventory", "Leaderboard", "Panel", "Shop" };
 function closeOtherGuis(p1)
-	local v32, v33, v34 = pairs(PlayerGui:GetChildren());
+	local v32, v33, v34 = pairs(l__PlayerGui__3:GetChildren());
 	while true do
 		local v35, v36 = v32(v33, v34);
 		if v35 then
@@ -103,17 +103,20 @@ function getItemInfo(p2)
 	local v37 = string.split(p2, "_");
 	return v37[1], v37[2];
 end;
-local Ignore = SoundService:WaitForChild("Ignore");
+function kick(p3)
+	return
+end;
+local l__Ignore__5 = l__SoundService__8:WaitForChild("Ignore");
 function playSound(p4, p5)
 	local v38 = Instance.new("Sound");
 	v38.SoundId = p4;
 	v38.Volume = p5;
 	v38.PlayOnRemove = true;
-	v38.Parent = Ignore;
+	v38.Parent = l__Ignore__5;
 	v38:Destroy();
 end;
 local u6 = false;
-local l__HiddenPlayers__7 = ReplicatedStorage:WaitForChild("HiddenPlayers");
+local l__HiddenPlayers__7 = l__ReplicatedStorage__4:WaitForChild("HiddenPlayers");
 function hidePlayers()
 	u6 = true;
 	local function v39(p6)
@@ -138,7 +141,7 @@ function hidePlayers()
 			end;
 		end;
 	end;
-	local v41, v42, v43 = pairs(Players:GetPlayers());
+	local v41, v42, v43 = pairs(l__Players__3:GetPlayers());
 	while true do
 		local v44, v45 = v41(v42, v43);
 		if v44 then
@@ -150,7 +153,7 @@ function hidePlayers()
 		v39(v45);	
 	end;
 	local u9 = nil;
-	u9 = Players.PlayerAdded:Connect(function(p8)
+	u9 = l__Players__3.PlayerAdded:Connect(function(p8)
 		if u6 == false then
 			u9:Disconnect();
 		end;
@@ -168,11 +171,11 @@ function unhidePlayers()
 			break;
 		end;
 		v48 = v49;
-		v50.Parent = Workspace;	
+		v50.Parent = l__Workspace__9;	
 	end;
 end;
 function userIdInGame(p9)
-	local v51, v52, v53 = pairs(Players:GetPlayers());
+	local v51, v52, v53 = pairs(l__Players__3:GetPlayers());
 	while true do
 		local v54, v55 = v51(v52, v53);
 		if v54 then
@@ -190,30 +193,83 @@ local l__StarterGui__10 = game:GetService("StarterGui");
 task.delay(5, function()
 	local v56 = Instance.new("BindableEvent");
 	v56.Event:Connect(function()
-		if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") and LocalPlayer.Character:FindFirstChild("Humanoid").Health > 0 then
-			RemoteEvent:FireServer("Reset");
+		if l__LocalPlayer__10.Character and l__LocalPlayer__10.Character:FindFirstChild("Humanoid") and l__LocalPlayer__10.Character:FindFirstChild("Humanoid").Health > 0 then
+			l__RemoteEvent__20:FireServer("Reset");
 		end;
 	end);
 	l__StarterGui__10:SetCore("ResetButtonCallback", v56);
 end);
-RunService.Heartbeat:Connect(function()
-	if not LocalPlayer.Character or not LocalPlayer.Character.PrimaryPart then
+l__RunService__1.Heartbeat:Connect(function()
+	if not l__LocalPlayer__10.Character or not l__LocalPlayer__10.Character.PrimaryPart then
 		return;
 	end;
-	local l__Screen__57 = WaitingRoom.FlappyBox.Screen;
-	if (LocalPlayer.Character.PrimaryPart.Position - l__Screen__57.Position).Magnitude > 15 then
+	local l__Screen__57 = l__WaitingRoom__12.FlappyBox.Screen;
+	if (l__LocalPlayer__10.Character.PrimaryPart.Position - l__Screen__57.Position).Magnitude > 15 then
 		l__Screen__57.GameGui.Enabled = false;
 		return;
 	end;
 	l__Screen__57.GameGui.Enabled = true;
 end);
 local u11 = {};
-LocalPlayer.CharacterAdded:Connect(function(p10)
+l__LocalPlayer__10.CharacterAdded:Connect(function(p10)
 	for v58, v59 in pairs(u11) do
 		v59:Disconnect();
 		table.remove(u11, table.find(u11, v59));
 	end;
-	local Humanoid = p10:WaitForChild("Humanoid");
+	local l__Humanoid__60 = p10:WaitForChild("Humanoid");
+	local v61 = p10.ChildAdded:Connect(function(p11)
+		if p11.Name == "NoJump" then
+			local u12 = nil;
+			u12 = p11.Changed:Connect(function()
+				if p11.Disabled == true then
+					u12:Disconnect();
+					kick("nojump disabled");
+				end;
+			end);
+			table.insert(u11, u12);
+			return;
+		end;
+		if p11.Name == "Freeze" then
+			local u13 = nil;
+			u13 = p11.Changed:Connect(function()
+				if p11.Disabled == true then
+					u13:Disconnect();
+					kick("freeze disabled");
+				end;
+			end);
+			table.insert(u11, u13);
+			return;
+		end;
+		if p11.Name == "Bomb" and p11:IsA("Tool") and p11:FindFirstChild("Handle") and p11:FindFirstChild("FirePart") then
+			local u14 = nil;
+			u14 = p11.Changed:Connect(function()
+				if p11.GripPos ~= Vector3.new(0, 0, 0) then
+					u14:Disconnect();
+					kick("grip");
+				end;
+			end);
+			local u15 = nil;
+			u15 = p11.Handle.Changed:Connect(function()
+				if p11:FindFirstChild("Handle") and p11.Handle.Size ~= Vector3.new(2, 2, 2) then
+					u15:Disconnect();
+					kick("size");
+				end;
+			end);
+			table.insert(u11, u14);
+			table.insert(u11, u15);
+			return;
+		end;
+		if p11.Name == "ClassicSword" and p11:IsA("Tool") and p11:FindFirstChild("Handle") and p11:FindFirstChild("MouseIcon") then
+			local u16 = nil;
+			u16 = p11.Handle.Changed:Connect(function()
+				if p11.Handle and p11.Handle.Size ~= Vector3.new(1, 0.8, 4) then
+					u16:Disconnect();
+					kick("size");
+				end;
+			end);
+			table.insert(u11, u16);
+		end;
+	end);
 	local v62 = p10.DescendantAdded:Connect(function(p12)
 		if not (not p12:IsA("BodyThrust")) or not (not p12:IsA("BodyVelocity")) or not (not p12:IsA("BodyGyro")) or not (not p12:IsA("BodyPosition")) or not (not p12:IsA("BodyAngularVelocity")) or p12:IsA("BodyForce") then
 			if p12:IsA("BodyVelocity") and p12:GetAttribute("ServerVelocity") == true then
@@ -226,37 +282,114 @@ LocalPlayer.CharacterAdded:Connect(function(p10)
 			end;
 		end;
 	end);
-	local v63 = Humanoid.Changed:Connect(function()
-		if LocalPlayer.Team and LocalPlayer.Team.Name == "Freezer" then
-			if Humanoid.WalkSpeed ~= shared.azurite_custom_minigames.FreezerSpeed and Humanoid.WalkSpeed ~= 0 then
-				Humanoid.WalkSpeed = shared.azurite_custom_minigames.FreezerSpeed;
+	local v63 = l__Humanoid__60.Changed:Connect(function()
+		if l__LocalPlayer__10.Team and l__LocalPlayer__10.Team.Name == "Freezer" then
+			if l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.FreezerSpeed and l__Humanoid__60.WalkSpeed ~= 0 then
+				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.FreezerSpeed;
 				return;
 			end;
 		else
-			if Humanoid.WalkSpeed ~= shared.azurite_custom_minigames.BombSpeed and Humanoid.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") ~= nil then
-				Humanoid.WalkSpeed = shared.azurite_custom_minigames.BombSpeed;
-			elseif Humanoid.WalkSpeed ~= shared.azurite_custom_minigames.NoBombSpeed and Humanoid.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") == nil then
-				Humanoid.WalkSpeed = shared.azurite_custom_minigames.NoBombSpeed;
+			if l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.NoBombSpeed and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") == nil then
+				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.NoBombSpeed;
+			elseif l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.BombSpeed and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") ~= nil then
+				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.BombSpeed;
+			elseif l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.NoBombSpeed and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") == nil then
+				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.NoBombSpeed;
 			end;
 		end;
 	end);
 	table.insert(u11, (p10.ChildRemoved:Connect(function(p13)
+		if p13.Name == "NoJump" and l__LocalPlayer__10.Team ~= nil then
+			kick("nojump");
+			return;
+		end;
+		if p13.Name == "Freeze" and l__LocalPlayer__10.Team ~= nil then
+			kick("freeze");
+			return;
+		end;
 		if p13.Name == "Humanoid" then
-			LocalPlayer:LoadCharacter();
+			l__LocalPlayer__10:LoadCharacter();
 		end;
 	end)));
 	table.insert(u11, v61);
 	table.insert(u11, v63);
 end);
-HB:GetPropertyChangedSignal("Value"):Connect(function()
-	if HB.Value == true then
+l__PlayerScripts__14.ChildRemoved:Connect(function(p14)
+	if p14.Name == "LocalScript" then
+		kick("tampering");
+	end;
+end);
+l__LocalScript__15.Changed:Connect(function()
+	if l__LocalScript__15.Disabled == true then
+		kick("disabled");
+	end;
+	if l__LocalScript__15.Parent ~= l__PlayerScripts__14 then
+		kick("trying 2 bypass");
+	end;
+end);
+l__ReplicatedStorage__4.DescendantRemoving:Connect(function(p15)
+	if p15.Parent:IsA("RemoteEvent") or p15.Parent.Name == "Events" then
+		kick("removing stuff from replicatedstorage (or server shut down)");
+	end;
+end);
+l__Events__17.Changed:Connect(function()
+	if l__Events__17.Name ~= "Events" then
+		kick("renamed events");
+	end;
+end);
+l__Events__17.ChildRemoved:Connect(function(p16)
+	kick("remove events");
+end);
+l__HB__2:GetPropertyChangedSignal("Value"):Connect(function()
+	if l__HB__2.Value == true then
 		coroutine.resume(updateServerHitboxes);
 	end;
 end);
-if HB.Value == true then
+if l__HB__2.Value == true then
 	coroutine.resume(updateServerHitboxes);
 end;
-
+for v64, v65 in pairs(l__Events__17:GetChildren()) do
+	local l__Name__17 = v65.Name;
+	v65.Changed:Connect(function()
+		if v65.Name ~= l__Name__17 then
+			kick("Illegal Property Change");
+		end;
+	end);
+	v65.ChildRemoved:Connect(function()
+		kick("Restricted Child Removal");
+	end);
+end;
+l__VIPRoom__11:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Size"):Connect(function()
+	if l__VIPRoom__11:WaitForChild("RoomCatch").Size ~= Vector3.new(71, 15, 71) then
+		kick("vip tamper");
+	end;
+end);
+l__VIPRoom__11:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Position"):Connect(function()
+	if l__VIPRoom__11:WaitForChild("RoomCatch").Position ~= Vector3.new(6.289, 32.16, 36.54) then
+		kick("vip tamper");
+	end;
+end);
+l__VIPRoom__11:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Orientation"):Connect(function()
+	if l__VIPRoom__11:WaitForChild("RoomCatch").Orientation ~= Vector3.new(0, 0, 0) then
+		kick("vip tamper");
+	end;
+end);
+for v66, v67 in pairs(l__WaitingRoom__12:WaitForChild("VIPElevator"):WaitForChild("Block"):GetChildren()) do
+	v67.TextButton.Activated:Connect(function()
+		l__MarketplaceService__5:PromptGamePassPurchase(l__LocalPlayer__10, 10967481);
+	end);
+end;
+l__WaitingRoom__12.DescendantRemoving:Connect(function(p17)
+	if p17:IsA("BasePart") and p17.Anchored == true then
+		print(p17, p17.Anchored, p17.Parent);
+		kick("waitingroom removing part");
+	end;
+end);
+script.Changed:Connect(function()
+	if script.Parent ~= l__PlayerScripts__14 then
+		kick("Illegal Property Change");
+	end;
+end);
 local u18 = true;
 local u19 = {
 	Incoming = {}, 
@@ -264,7 +397,7 @@ local u19 = {
 };
 local u20 = false;
 local u21 = false;
-RemoteEvent.OnClientEvent:Connect(function(...)
+l__RemoteEvent__20.OnClientEvent:Connect(function(...)
 	local v68 = { ... };
 	local v69 = v68[1];
 	if v69 == "ServerMessage" then
@@ -280,7 +413,7 @@ RemoteEvent.OnClientEvent:Connect(function(...)
 		if typeof(v68[2]) == "string" and typeof(v68[3]) == "number" then
 			local v70 = Instance.new("Message");
 			v70.Text = v68[2];
-			v70.Parent = Workspace;
+			v70.Parent = l__Workspace__9;
 			coroutine.wrap(function()
 				wait(v68[3]);
 				v70:Destroy();
@@ -306,7 +439,7 @@ RemoteEvent.OnClientEvent:Connect(function(...)
 			l__StarterGui__10:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, false);
 			hidePlayers();
 			local u22 = nil;
-			u22 = LocalPlayer.CharacterAdded:Connect(function()
+			u22 = l__LocalPlayer__10.CharacterAdded:Connect(function()
 				u22:Disconnect();
 				l__StarterGui__10:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, true);
 				l__StarterGui__10:SetCoreGuiEnabled(Enum.CoreGuiType.PlayerList, true);
@@ -336,10 +469,10 @@ RemoteEvent.OnClientEvent:Connect(function(...)
 			end;
 		end;
 		if v69 == "RetrieveTrade" then
-			if v68[2]:IsDescendantOf(Players) then
+			if v68[2]:IsDescendantOf(l__Players__3) then
 				u19.Incoming[v68[2]] = v68[2];
-				if PlayerGui.Inventory.Main.Visible == true and PlayerGui.Inventory.Main.TradingFrame:FindFirstChild(v68[2].Name) then
-					PlayerGui.Inventory.Main.TradingFrame:FindFirstChild(v68[2].Name).Request.Text = "Incoming Trade";
+				if l__PlayerGui__3.Inventory.Main.Visible == true and l__PlayerGui__3.Inventory.Main.TradingFrame:FindFirstChild(v68[2].Name) then
+					l__PlayerGui__3.Inventory.Main.TradingFrame:FindFirstChild(v68[2].Name).Request.Text = "Incoming Trade";
 				end;
 				l__StarterGui__10:SetCore("ChatMakeSystemMessage", {
 					Text = string.format("{Trade} You have an incoming trade from %s.", v68[2].Name), 
@@ -352,12 +485,12 @@ RemoteEvent.OnClientEvent:Connect(function(...)
 		else
 			if v69 == "SetupVIP" then
 				u20 = true;
-				WaitingRoom:WaitForChild("VIPElevator"):WaitForChild("Block").Position = Vector3.new(math.huge, 0, 0);
+				l__WaitingRoom__12:WaitForChild("VIPElevator"):WaitForChild("Block").Position = Vector3.new(math.huge, 0, 0);
 				return;
 			end;
 			if v69 == "2xLuck" then
 				u21 = true;
-				local l__PreviewFrame__72 = PlayerGui:WaitForChild("Shop"):WaitForChild("PreviewFrame");
+				local l__PreviewFrame__72 = l__PlayerGui__3:WaitForChild("Shop"):WaitForChild("PreviewFrame");
 				l__PreviewFrame__72.Common.Text = "Common = 40%";
 				l__PreviewFrame__72.Uncommon.Text = "Uncommon = 40%";
 				l__PreviewFrame__72.Rare.Text = "Rare = 18%";
@@ -367,11 +500,11 @@ RemoteEvent.OnClientEvent:Connect(function(...)
 		end;
 	end;
 end);
-function RemoteFunction.OnClientInvoke(...)
+function l__RemoteFunction__21.OnClientInvoke(...)
 	local v73 = { ... };
 	local v74 = v73[1];
 	if v74 == "ReadHumanoidValue" then
-		return LocalPlayer.Character:WaitForChild("Humanoid")[v73[2]];
+		return l__LocalPlayer__10.Character:WaitForChild("Humanoid")[v73[2]];
 	end;
 	if v74 == "Ping" then
 		return "Pinged";
@@ -381,10 +514,19 @@ function RemoteFunction.OnClientInvoke(...)
 	end;
 	return (v73[2].Position - v73[3].Position).Magnitude;
 end;
-if UserInputService.TouchEnabled or UserInputService.GamepadEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
+task.delay(10, function()
+	while true do
+		local v75 = tick();
+		task.wait(1);
+		if tick() - v75 > 3 then
+			l__LocalPlayer__10:Kick("possible freeze glitch");
+		end;	
+	end;
+end);
+if l__UserInputService__6.TouchEnabled or l__UserInputService__6.GamepadEnabled and not l__UserInputService__6.KeyboardEnabled and not l__UserInputService__6.MouseEnabled then
 	u18 = false;
 end;
-local l__Chat__24 = PlayerGui:WaitForChild("Chat");
+local l__Chat__24 = l__PlayerGui__3:WaitForChild("Chat");
 function setupChat()
 	local l__Scroller__76 = l__Chat__24:WaitForChild("Frame"):WaitForChild("ChatChannelParentFrame"):WaitForChild("Frame_MessageLogDisplay"):WaitForChild("Scroller");
 	local v77 = {};
@@ -413,7 +555,7 @@ function setupChat()
 					end;				
 				end;
 				local u25 = nil;
-				u25 = RunService.Stepped:Connect(function()
+				u25 = l__RunService__1.Stepped:Connect(function()
 					if not l__TextLabel__79 then
 						u25:Disconnect();
 						return;
@@ -462,7 +604,7 @@ function setupChat()
 					end;				
 				end;
 				local u26 = nil;
-				u26 = RunService.Stepped:Connect(function()
+				u26 = l__RunService__1.Stepped:Connect(function()
 					if not l__TextLabel__79 then
 						u26:Disconnect();
 						return;
@@ -510,7 +652,7 @@ function setupChat()
 				end;
 				local u27 = nil;
 				local u28 = { "b", "i", "u", "s" };
-				u27 = RunService.Stepped:Connect(function()
+				u27 = l__RunService__1.Stepped:Connect(function()
 					local v116 = nil;
 					if not l__TextLabel__79 then
 						u27:Disconnect();
@@ -553,7 +695,7 @@ function setupChat()
 					end;				
 				end;
 				local u29 = nil;
-				u29 = RunService.Stepped:Connect(function()
+				u29 = l__RunService__1.Stepped:Connect(function()
 					if not l__TextLabel__79 then
 						u29:Disconnect();
 						return;
@@ -647,13 +789,13 @@ function setupChat()
 		end;
 	end);
 end;
-local l__Info__30 = PlayerGui:WaitForChild("Info");
-local l__Message__31 = PlayerGui:WaitForChild("Message");
-local u32 = require(Modules:WaitForChild("LevelData"));
-local l__Leaderboard__33 = PlayerGui:WaitForChild("Leaderboard");
-local l__Inventory__34 = PlayerGui:WaitForChild("Inventory");
+local l__Info__30 = l__PlayerGui__3:WaitForChild("Info");
+local l__Message__31 = l__PlayerGui__3:WaitForChild("Message");
+local u32 = require(l__Modules__16:WaitForChild("LevelData"));
+local l__Leaderboard__33 = l__PlayerGui__3:WaitForChild("Leaderboard");
+local l__Inventory__34 = l__PlayerGui__3:WaitForChild("Inventory");
 local u35 = false;
-local l__Shop__36 = PlayerGui:WaitForChild("Shop");
+local l__Shop__36 = l__PlayerGui__3:WaitForChild("Shop");
 function setupInfoGui()
 	local v154 = l__Info__30:WaitForChild("Copy"):Clone();
 	l__Info__30.Copy:Destroy();
@@ -675,8 +817,8 @@ function setupInfoGui()
 	local u37 = false;
 	local l__RadioSettings__38 = l__Info__30:WaitForChild("RadioSettings");
 	local l__LevelFrame__39 = l__Info__30:WaitForChild("LevelFrame");
-	l__LevelFrame__39.Headshot.Image = string.format("rbxthumb://type=AvatarHeadShot&id=%i&w=420&h=420", LocalPlayer.UserId);
-	l__LevelFrame__39.PlayerName.Text = LocalPlayer.Name;
+	l__LevelFrame__39.Headshot.Image = string.format("rbxthumb://type=AvatarHeadShot&id=%i&w=420&h=420", l__LocalPlayer__10.UserId);
+	l__LevelFrame__39.PlayerName.Text = l__LocalPlayer__10.Name;
 	local function u40(p24)
 		local v170, v171, v172 = u32:XPToLevel(p24);
 		l__LevelFrame__39.TotalXP.Text = string.format("Total XP: %i", p24);
@@ -872,14 +1014,14 @@ function setupInfoGui()
 		end;
 		l__LevelFrame__39.LevelInfo.Text = string.format("Your level is: %i (%s)", v170, v173);
 		l__LevelFrame__39.Bar.XPProgress.Text = string.format("%i / %i", v172, v171);
-		TweenService:Create(l__LevelFrame__39.Bar.Progress, TweenInfo.new(0.5), {
+		l__TweenService__2:Create(l__LevelFrame__39.Bar.Progress, TweenInfo.new(0.5), {
 			Size = UDim2.new(v172 / v171, 0, 1, 0)
 		}):Play();
 	end;
 	task.delay(5, function()
-		u40(RemoteFunction:InvokeServer("GetXP"));
+		u40(l__RemoteFunction__21:InvokeServer("GetXP"));
 	end);
-	local v174, v175 = pcall(MarketplaceService.UserOwnsGamePassAsync, MarketplaceService, LocalPlayer.UserId, 21132978);
+	local v174, v175 = pcall(l__MarketplaceService__5.UserOwnsGamePassAsync, l__MarketplaceService__5, l__LocalPlayer__10.UserId, 21132978);
 	if not v174 then
 		v175 = false;
 	end;
@@ -918,16 +1060,16 @@ function setupInfoGui()
 		end;	
 	end;
 	local u44 = false;
-	UserInputService.InputChanged:Connect(function()
+	l__UserInputService__6.InputChanged:Connect(function()
 		if u44 then
-			local v186 = UserInputService:GetMouseLocation() - Vector2.new(l__RadioSettings__38.VolumeSlider.Slider.AbsoluteSize.X / 2, 0) - l__RadioSettings__38.VolumeSlider.AbsolutePosition;
+			local v186 = l__UserInputService__6:GetMouseLocation() - Vector2.new(l__RadioSettings__38.VolumeSlider.Slider.AbsoluteSize.X / 2, 0) - l__RadioSettings__38.VolumeSlider.AbsolutePosition;
 			local v187 = l__RadioSettings__38.VolumeSlider.AbsoluteSize.X - l__RadioSettings__38.VolumeSlider.Slider.AbsoluteSize.X;
 			local v188 = math.clamp(v186.X, 0, v187);
 			l__RadioSettings__38.VolumeSlider.Slider.Position = UDim2.new(0, v188, 0.256, 0);
-			RemoteEvent:FireServer("ChangeRadioSetting", "Volume", math.floor(v188 / v187 * 10) / 10);
+			l__RemoteEvent__20:FireServer("ChangeRadioSetting", "Volume", math.floor(v188 / v187 * 10) / 10);
 		end;
 	end);
-	UserInputService.InputEnded:Connect(function(p25, p26)
+	l__UserInputService__6.InputEnded:Connect(function(p25, p26)
 		if p25.UserInputType ~= Enum.UserInputType.MouseButton1 then
 			if p25.UserInputType == Enum.UserInputType.Touch then
 				u44 = false;
@@ -940,17 +1082,17 @@ function setupInfoGui()
 		if p27 == true then
 
 		else
-			local v189 = { TweenService:Create(l__MessageFrame__159, TweenInfo.new(0.25), {
+			local v189 = { l__TweenService__2:Create(l__MessageFrame__159, TweenInfo.new(0.25), {
 					BackgroundTransparency = 1
-				}), TweenService:Create(l__MessageFrame__159.Headshot, TweenInfo.new(0.25), {
+				}), l__TweenService__2:Create(l__MessageFrame__159.Headshot, TweenInfo.new(0.25), {
 					ImageTransparency = 1
-				}), TweenService:Create(l__MessageFrame__159.Message, TweenInfo.new(0.25), {
+				}), l__TweenService__2:Create(l__MessageFrame__159.Message, TweenInfo.new(0.25), {
 					TextTransparency = 1
-				}), TweenService:Create(l__MessageFrame__159.Message.UIStroke, TweenInfo.new(0.25), {
+				}), l__TweenService__2:Create(l__MessageFrame__159.Message.UIStroke, TweenInfo.new(0.25), {
 					Transparency = 1
-				}), TweenService:Create(l__MessageFrame__159.Username, TweenInfo.new(0.25), {
+				}), l__TweenService__2:Create(l__MessageFrame__159.Username, TweenInfo.new(0.25), {
 					TextTransparency = 1
-				}), TweenService:Create(l__MessageFrame__159.Username.UIStroke, TweenInfo.new(0.25), {
+				}), l__TweenService__2:Create(l__MessageFrame__159.Username.UIStroke, TweenInfo.new(0.25), {
 					Transparency = 1
 				}) };
 			local v190, v191, v192 = pairs(v189);
@@ -977,17 +1119,17 @@ function setupInfoGui()
 		l__MessageFrame__159.Username.TextTransparency = 1;
 		l__MessageFrame__159.Username.UIStroke.Transparency = 1;
 		l__MessageFrame__159.Visible = true;
-		local v195, v196, v197 = pairs({ TweenService:Create(l__MessageFrame__159, TweenInfo.new(0.25), {
+		local v195, v196, v197 = pairs({ l__TweenService__2:Create(l__MessageFrame__159, TweenInfo.new(0.25), {
 				BackgroundTransparency = 0.5
-			}), TweenService:Create(l__MessageFrame__159.Headshot, TweenInfo.new(0.25), {
+			}), l__TweenService__2:Create(l__MessageFrame__159.Headshot, TweenInfo.new(0.25), {
 				ImageTransparency = 0
-			}), TweenService:Create(l__MessageFrame__159.Message, TweenInfo.new(0.25), {
+			}), l__TweenService__2:Create(l__MessageFrame__159.Message, TweenInfo.new(0.25), {
 				TextTransparency = 0
-			}), TweenService:Create(l__MessageFrame__159.Message.UIStroke, TweenInfo.new(0.25), {
+			}), l__TweenService__2:Create(l__MessageFrame__159.Message.UIStroke, TweenInfo.new(0.25), {
 				Transparency = 0
-			}), TweenService:Create(l__MessageFrame__159.Username, TweenInfo.new(0.25), {
+			}), l__TweenService__2:Create(l__MessageFrame__159.Username, TweenInfo.new(0.25), {
 				TextTransparency = 0
-			}), TweenService:Create(l__MessageFrame__159.Username.UIStroke, TweenInfo.new(0.25), {
+			}), l__TweenService__2:Create(l__MessageFrame__159.Username.UIStroke, TweenInfo.new(0.25), {
 				Transparency = 0
 			}) });
 		while true do
@@ -1001,7 +1143,7 @@ function setupInfoGui()
 			v199:Play();		
 		end;
 	end;
-	RemoteEvent.OnClientEvent:Connect(function(p28, ...)
+	l__RemoteEvent__20.OnClientEvent:Connect(function(p28, ...)
 		local v200 = { ... };
 		if p28 == "EnableRadio" then
 			u37 = true;
@@ -1015,10 +1157,10 @@ function setupInfoGui()
 		end;
 		if p28 == "Message" then
 			local v201 = v200[1];
-			local v202, v203 = Players:GetUserThumbnailAsync(v201, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420);
+			local v202, v203 = l__Players__3:GetUserThumbnailAsync(v201, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420);
 			l__MessageFrame__159.Headshot.Image = v202;
 			l__MessageFrame__159.Message.Text = "";
-			l__MessageFrame__159.Username.Text = string.format("Message from %s", (Players:GetNameFromUserIdAsync(v201)));
+			l__MessageFrame__159.Username.Text = string.format("Message from %s", (l__Players__3:GetNameFromUserIdAsync(v201)));
 			u45(true);
 			local v204, v205, v206 = pairs((string.split(v200[2], "")));
 			while true do
@@ -1038,7 +1180,7 @@ function setupInfoGui()
 	end);
 	l__Playing__165.MouseButton1Down:Connect(function()
 		playSound("rbxassetid://140910211", 0.5);
-		local v209 = RemoteFunction:InvokeServer("SetActivity");
+		local v209 = l__RemoteFunction__21:InvokeServer("SetActivity");
 		if v209 == true then
 			l__Playing__165.Info.Text = "Playing";
 			l__Playing__165.Info.TextColor3 = Color3.new(1, 1, 1);
@@ -1057,7 +1199,7 @@ function setupInfoGui()
 		playSound("rbxassetid://140910211", 0.5);
 		if u46 == false then
 			u46 = true;
-			local v210, v211, v212 = pairs(SoundService:GetDescendants());
+			local v210, v211, v212 = pairs(l__SoundService__8:GetDescendants());
 			while true do
 				local v213, v214 = v210(v211, v212);
 				if v213 then
@@ -1067,14 +1209,14 @@ function setupInfoGui()
 				end;
 				v212 = v213;
 				if v214:IsA("Sound") then
-					if v214.Parent ~= Ignore then
+					if v214.Parent ~= l__Ignore__5 then
 						v214.Volume = 0;
 					end;
 				end;			
 			end;
-			u47 = SoundService.DescendantAdded:Connect(function(p29)
+			u47 = l__SoundService__8.DescendantAdded:Connect(function(p29)
 				if p29:IsA("Sound") then
-					if p29.Parent ~= Ignore then
+					if p29.Parent ~= l__Ignore__5 then
 						p29.Volume = 0;
 					end;
 				end;
@@ -1090,7 +1232,7 @@ function setupInfoGui()
 				u47:Disconnect();
 				u47 = nil;
 			end;
-			local v215, v216, v217 = pairs(SoundService:GetDescendants());
+			local v215, v216, v217 = pairs(l__SoundService__8:GetDescendants());
 			while true do
 				local v218, v219 = v215(v216, v217);
 				if v218 then
@@ -1100,7 +1242,7 @@ function setupInfoGui()
 				end;
 				v217 = v218;
 				if v219:IsA("Sound") then
-					if v219.Parent ~= Ignore then
+					if v219.Parent ~= l__Ignore__5 then
 						v219.Volume = 0.13;
 					end;
 				end;			
@@ -1149,10 +1291,10 @@ function setupInfoGui()
 	end);
 	l__AdFrame__155.Buy.MouseButton1Down:Connect(function()
 		if l__AdFrame__155.IsDeveloperProduct.Value == false then
-			MarketplaceService:PromptGamePassPurchase(LocalPlayer, l__AdFrame__155.Product.Value);
+			l__MarketplaceService__5:PromptGamePassPurchase(l__LocalPlayer__10, l__AdFrame__155.Product.Value);
 			return;
 		end;
-		MarketplaceService:PromptProductPurchase(LocalPlayer, l__AdFrame__155.Product.Value);
+		l__MarketplaceService__5:PromptProductPurchase(l__LocalPlayer__10, l__AdFrame__155.Product.Value);
 	end);
 	l__LevelToggle__157.Button.MouseButton1Down:Connect(function()
 		if l__LevelFrame__39.Visible == false then
@@ -1193,78 +1335,78 @@ function setupInfoGui()
 			return;
 		end;
 		if l__RadioSettings__38.LPButton.ImageColor3 == Color3.new(1, 0, 0) then
-			RemoteEvent:FireServer("ChangeRadioSetting", "EnableLooping", true);
+			l__RemoteEvent__20:FireServer("ChangeRadioSetting", "EnableLooping", true);
 			l__RadioSettings__38.LPButton.ImageColor3 = Color3.new(0, 1, 0);
 			return;
 		end;
 		if l__RadioSettings__38.LPButton.ImageColor3 == Color3.new(0, 1, 0) then
-			RemoteEvent:FireServer("ChangeRadioSetting", "EnableLooping", false);
+			l__RemoteEvent__20:FireServer("ChangeRadioSetting", "EnableLooping", false);
 			l__RadioSettings__38.LPButton.ImageColor3 = Color3.new(1, 0, 0);
 		end;
 	end);
 	local function u48(p30)
 		u41 = true;
 		if p30 then
-			local AdminList0, AdminList1, AdminList2 = pairs(u42);
+			local v220, v221, v222 = pairs(u42);
 			while true do
-				local AdminList3, AdminList4 = AdminList0(AdminList1, AdminList2);
-				if AdminList3 then
+				local v223, v224 = v220(v221, v222);
+				if v223 then
 
 				else
 					break;
 				end;
-				AdminList2 = AdminList3;
-				AdminList4:Disconnect();			
+				v222 = v223;
+				v224:Disconnect();			
 			end;
-			local AdminList5, AdminList6, AdminList7 = pairs(u43);
+			local v225, v226, v227 = pairs(u43);
 			while true do
-				local AdminList8, AdminList9 = AdminList5(AdminList6, AdminList7);
-				if AdminList8 then
+				local v228, v229 = v225(v226, v227);
+				if v228 then
 
 				else
 					break;
 				end;
-				AdminList7 = AdminList8;
-				if AdminList9 then
-					AdminList9.Volume = 0.5;
+				v227 = v228;
+				if v229 then
+					v229.Volume = 0.5;
 				end;			
 			end;
 			u41 = false;
 			return;
 		end;
-		local MinigameData0, MinigameData1, MinigameData2 = pairs(Players:GetPlayers());
+		local v230, v231, v232 = pairs(l__Players__3:GetPlayers());
 		while true do
-			local MinigameData3, MinigameData4 = MinigameData0(MinigameData1, MinigameData2);
-			if MinigameData3 then
+			local v233, v234 = v230(v231, v232);
+			if v233 then
 
 			else
 				break;
 			end;
-			MinigameData2 = MinigameData3;
-			if MinigameData4 ~= LocalPlayer then
-				if MinigameData4.Character then
-					if MinigameData4.Character:FindFirstChild("Radio") then
-						local l__Radio__235 = MinigameData4.Character:FindFirstChild("Radio");
+			v232 = v233;
+			if v234 ~= l__LocalPlayer__10 then
+				if v234.Character then
+					if v234.Character:FindFirstChild("Radio") then
+						local l__Radio__235 = v234.Character:FindFirstChild("Radio");
 						if l__Radio__235:FindFirstChild("RadioPart") then
 							if l__Radio__235:FindFirstChild("RadioPart"):FindFirstChild("Sound") then
 								local l__Sound__236 = l__Radio__235:FindFirstChild("RadioPart"):FindFirstChild("Sound");
-								local MinigameData7 = l__Sound__236:GetPropertyChangedSignal("Volume"):Connect(function()
+								local v237 = l__Sound__236:GetPropertyChangedSignal("Volume"):Connect(function()
 									l__Sound__236.Volume = 0;
 								end);
 								l__Sound__236.Volume = 0;
 								table.insert(u43, l__Sound__236);
-								table.insert(u42, MinigameData7);
+								table.insert(u42, v237);
 							end;
 						end;
 					end;
 				end;
 			end;		
 		end;
-		table.insert(u42, (Workspace.DescendantAdded:Connect(function(p31)
+		table.insert(u42, (l__Workspace__9.DescendantAdded:Connect(function(p31)
 			if p31:IsA("Sound") then
 				if p31.Parent.Name == "RadioPart" then
-					if Players:GetPlayerFromCharacter(p31.Parent.Parent.Parent) then
-						if Players:GetPlayerFromCharacter(p31.Parent.Parent.Parent) ~= LocalPlayer then
+					if l__Players__3:GetPlayerFromCharacter(p31.Parent.Parent.Parent) then
+						if l__Players__3:GetPlayerFromCharacter(p31.Parent.Parent.Parent) ~= l__LocalPlayer__10 then
 							p31.Volume = 0;
 							table.insert(u43, p31);
 						end;
@@ -1287,12 +1429,12 @@ function setupInfoGui()
 	end);
 	l__RadioSettings__38.RVButton.MouseButton1Down:Connect(function()
 		if l__RadioSettings__38.RVButton.ImageColor3 == Color3.new(1, 0, 0) then
-			RemoteEvent:FireServer("ChangeRadioSetting", "Visible", true);
+			l__RemoteEvent__20:FireServer("ChangeRadioSetting", "Visible", true);
 			l__RadioSettings__38.RVButton.ImageColor3 = Color3.new(0, 1, 0);
 			return;
 		end;
 		if l__RadioSettings__38.RVButton.ImageColor3 == Color3.new(0, 1, 0) then
-			RemoteEvent:FireServer("ChangeRadioSetting", "Visible", false);
+			l__RemoteEvent__20:FireServer("ChangeRadioSetting", "Visible", false);
 			l__RadioSettings__38.RVButton.ImageColor3 = Color3.new(1, 0, 0);
 		end;
 	end);
@@ -1301,17 +1443,17 @@ function setupInfoGui()
 			return;
 		end;
 		if tonumber(l__RadioSettings__38.SoundIdBox.Text) then
-			RemoteEvent:FireServer("ChangeRadioSetting", "EnableSound", true, tonumber(l__RadioSettings__38.SoundIdBox.Text));
+			l__RemoteEvent__20:FireServer("ChangeRadioSetting", "EnableSound", true, tonumber(l__RadioSettings__38.SoundIdBox.Text));
 		end;
 	end);
 	l__RadioSettings__38.Stop.MouseButton1Down:Connect(function()
 		if not u37 then
 			return;
 		end;
-		RemoteEvent:FireServer("ChangeRadioSetting", "EnableSound", false);
+		l__RemoteEvent__20:FireServer("ChangeRadioSetting", "EnableSound", false);
 	end);
 	l__RadioSettings__38.Wall.TextButton.MouseButton1Down:Connect(function()
-		MarketplaceService:PromptGamePassPurchase(LocalPlayer, 21132978);
+		l__MarketplaceService__5:PromptGamePassPurchase(l__LocalPlayer__10, 21132978);
 	end);
 	l__RadioSettings__38.VolumeSlider.Slider.MouseButton1Down:Connect(function()
 		if not u37 then
@@ -1319,11 +1461,11 @@ function setupInfoGui()
 		end;
 		u44 = true;
 	end);
-	local MinigameData8, MinigameData9 = pcall(MarketplaceService.UserOwnsGamePassAsync, MarketplaceService, LocalPlayer.UserId, l__AdFrame__155.Product.Value);
-	if not MinigameData8 then
-		MinigameData9 = false;
+	local v238, v239 = pcall(l__MarketplaceService__5.UserOwnsGamePassAsync, l__MarketplaceService__5, l__LocalPlayer__10.UserId, l__AdFrame__155.Product.Value);
+	if not v238 then
+		v239 = false;
 	end;
-	if not MinigameData9 then
+	if not v239 then
 		coroutine.wrap(function()
 			wait(5);
 			l__AdFrame__155.Visible = true;
@@ -1333,52 +1475,52 @@ function setupInfoGui()
 	end;
 	if u18 == true then
 		l__EnableShiftLock__162.Visible = false;
-		local TagAppearance0, TagAppearance1, TagAppearance2 = pairs({ l__Mute__164, l__Playing__165, l__OpenLeader__166 });
+		local v240, v241, v242 = pairs({ l__Mute__164, l__Playing__165, l__OpenLeader__166 });
 		while true do
-			local TagAppearance3, TagAppearance4 = TagAppearance0(TagAppearance1, TagAppearance2);
-			if TagAppearance3 then
+			local v243, v244 = v240(v241, v242);
+			if v243 then
 
 			else
 				break;
 			end;
-			TagAppearance2 = TagAppearance3;
-			TagAppearance4.MouseEnter:Connect(function()
-				TagAppearance4.Info.Visible = true;
+			v242 = v243;
+			v244.MouseEnter:Connect(function()
+				v244.Info.Visible = true;
 			end);
-			TagAppearance4.MouseLeave:Connect(function()
-				TagAppearance4.Info.Visible = false;
+			v244.MouseLeave:Connect(function()
+				v244.Info.Visible = false;
 			end);		
 		end;
 	elseif u18 == false then
 		local u49 = false;
 		l__EnableShiftLock__162.MouseButton1Down:Connect(function()
 			if u49 == false then
-				local TagAppearance5 = require(PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("CameraModule"));
-				TagAppearance5.activeCameraController:Enable(true);
-				TagAppearance5.activeCameraController:SetIsMouseLocked(true);
+				local v245 = require(l__PlayerScripts__14:WaitForChild("PlayerModule"):WaitForChild("CameraModule"));
+				v245.activeCameraController:Enable(true);
+				v245.activeCameraController:SetIsMouseLocked(true);
 				l__EnableShiftLock__162.Image = "rbxassetid://5393987253";
 				u49 = true;
 				return;
 			end;
 			if u49 == true then
-				local TagAppearance6 = require(PlayerScripts:WaitForChild("PlayerModule"):WaitForChild("CameraModule"));
-				TagAppearance6.activeCameraController:Enable(true);
-				TagAppearance6.activeCameraController:SetIsMouseLocked(false);
+				local v246 = require(l__PlayerScripts__14:WaitForChild("PlayerModule"):WaitForChild("CameraModule"));
+				v246.activeCameraController:Enable(true);
+				v246.activeCameraController:SetIsMouseLocked(false);
 				l__EnableShiftLock__162.Image = "rbxassetid://5393987091";
 				u49 = false;
 			end;
 		end);
-		if Workspace.CurrentCamera.ViewportSize.X < 1000 then
-			if Workspace.CurrentCamera.ViewportSize.Y < 1000 then
-				local TagAppearance7, TagAppearance8, TagAppearance9 = pairs(l__Main__156:GetDescendants());
+		if l__Workspace__9.CurrentCamera.ViewportSize.X < 1000 then
+			if l__Workspace__9.CurrentCamera.ViewportSize.Y < 1000 then
+				local v247, v248, v249 = pairs(l__Main__156:GetDescendants());
 				while true do
-					local v250, v251 = TagAppearance7(TagAppearance8, TagAppearance9);
+					local v250, v251 = v247(v248, v249);
 					if v250 then
 
 					else
 						break;
 					end;
-					TagAppearance9 = v250;
+					v249 = v250;
 					if not table.find(v169, v251) then
 						if v251:IsA("GuiObject") then
 							v251.Size = UDim2.new(0, v251.Size.X.Offset * 0.6666666666666666, 0, v251.Size.Y.Offset * 0.6666666666666666);
@@ -1420,7 +1562,7 @@ function setupInfoGui()
 		end;
 	end;
 end;
-local u50 = require(Modules:WaitForChild("ItemData"));
+local u50 = require(l__Modules__16:WaitForChild("ItemData"));
 local u51 = {
 	Common = 5, 
 	Uncommon = 4, 
@@ -1428,7 +1570,7 @@ local u51 = {
 	Special = 2, 
 	Unobtainable = 1
 };
-local u52 = require(Modules:WaitForChild("ImageData"));
+local u52 = require(l__Modules__16:WaitForChild("ImageData"));
 local u53 = {
 	Common = Color3.fromRGB(0, 0, 255), 
 	Uncommon = Color3.fromRGB(255, 0, 255), 
@@ -1490,8 +1632,8 @@ function setupInventoryGui()
 		v272.LayoutOrder = u51[l__Rarity__273];
 		if p33 == "ChatTags" then
 			v272.ItemImage.Visible = false;
-			v272.ItemLabel.Text = string.format("[%s]", TagAppearance[p34].TagText);
-			v272.ItemLabel.TextColor3 = TagAppearance[p34].TagColor;
+			v272.ItemLabel.Text = string.format("[%s]", v24[p34].TagText);
+			v272.ItemLabel.TextColor3 = v24[p34].TagColor;
 			v272.ItemLabel.Visible = true;
 		elseif u52[p33][string.lower(p34)] then
 			v272.ItemImage.Image = u52[p33][string.lower(p34)];
@@ -1530,7 +1672,7 @@ function setupInventoryGui()
 					end;				
 				end;
 				local u60 = nil;
-				u60 = RunService.Stepped:Connect(function()
+				u60 = l__RunService__1.Stepped:Connect(function()
 					if v272 then
 						if not v272:FindFirstChild("ItemName") then
 							u60:Disconnect();
@@ -1587,7 +1729,7 @@ function setupInventoryGui()
 							end;						
 						end;
 						local u61 = nil;
-						u61 = RunService.Stepped:Connect(function()
+						u61 = l__RunService__1.Stepped:Connect(function()
 							if v272 then
 								if not v272:FindFirstChild("ItemName") then
 									u61:Disconnect();
@@ -1639,7 +1781,7 @@ function setupInventoryGui()
 						end;
 						local u62 = nil;
 						local u63 = { "b", "i", "u", "s" };
-						u62 = RunService.Stepped:Connect(function()
+						u62 = l__RunService__1.Stepped:Connect(function()
 							local v310 = nil;
 							if v272 then
 								if not v272:FindFirstChild("ItemName") then
@@ -1682,7 +1824,7 @@ function setupInventoryGui()
 							end;						
 						end;
 						local u64 = nil;
-						u64 = RunService.Stepped:Connect(function()
+						u64 = l__RunService__1.Stepped:Connect(function()
 							if v272 then
 								if not v272:FindFirstChild("ItemName") then
 									u64:Disconnect();
@@ -1737,7 +1879,7 @@ function setupInventoryGui()
 							end;						
 						end;
 						local u65 = nil;
-						u65 = RunService.Stepped:Connect(function()
+						u65 = l__RunService__1.Stepped:Connect(function()
 							if v272 then
 								if not v272:FindFirstChild("ItemName") then
 									u65:Disconnect();
@@ -1816,7 +1958,7 @@ function setupInventoryGui()
 	local l__InventoryFrame__66 = l__Main__257:WaitForChild("InventoryFrame");
 	local u67 = nil;
 	local u68 = {};
-	local u69 = require(Modules:WaitForChild("TradeupItemCheck"));
+	local u69 = require(l__Modules__16:WaitForChild("TradeupItemCheck"));
 	local u70 = { "", "", "", "", "", "", "", "", "", "" };
 	local u71 = false;
 	local u72 = false;
@@ -1866,10 +2008,10 @@ function setupInventoryGui()
 			else
 				v353.Visible = true;
 			end;
-			if LocalPlayer == p38 then
+			if l__LocalPlayer__10 == p38 then
 				if p39 == l__InventoryFrame__66 then
 					v353.Button.MouseButton1Down:Connect(function()
-						local v354, v355 = RemoteFunction:InvokeServer("SetEquip", p37, v351, v352.Serial);
+						local v354, v355 = l__RemoteFunction__21:InvokeServer("SetEquip", p37, v351, v352.Serial);
 						if v354 == false then
 							warn("Item failed to equip; you are either in cooldown or an error occured.");
 							return;
@@ -1904,11 +2046,11 @@ function setupInventoryGui()
 				elseif p39 == l__TradeFrame__262.LocalInventory then
 					v353.Button.MouseButton1Down:Connect(function()
 						if u50.AllItems[p37][v352.Name].Tradable == false then
-							if not table.find(AdminList, LocalPlayer.UserId) then
+							if not table.find(v22, l__LocalPlayer__10.UserId) then
 								return;
 							end;
 						end;
-						if RemoteFunction:InvokeServer("ChangeOffer", "Add", u67, v353.Name) == true then
+						if l__RemoteFunction__21:InvokeServer("ChangeOffer", "Add", u67, v353.Name) == true then
 
 						else
 							warn("Item failed to add: " .. v352.Name);
@@ -2086,7 +2228,7 @@ function setupInventoryGui()
 	local l__TradingFrame__79 = l__Main__257:WaitForChild("TradingFrame");
 	local u80 = {};
 	local function u81(p40, p41)
-		local v387, v388 = RemoteFunction:InvokeServer("GetInventory", p40);
+		local v387, v388 = l__RemoteFunction__21:InvokeServer("GetInventory", p40);
 		u55 = v388;
 		u54 = v387;
 		u73 = p40;
@@ -2106,7 +2248,7 @@ function setupInventoryGui()
 				end;
 				u58(p41.Items);
 				p41.Placeholder.Visible = true;
-				if p40 == LocalPlayer then
+				if p40 == l__LocalPlayer__10 then
 					p41.Placeholder.Text = "There are no items in your inventory.";
 					return;
 				else
@@ -2128,7 +2270,7 @@ function setupInventoryGui()
 			end;
 			u58(p41.Items);
 			p41.Placeholder.Visible = true;
-			if p40 == LocalPlayer then
+			if p40 == l__LocalPlayer__10 then
 				p41.Placeholder.Text = "There are no items in your inventory.";
 				return;
 			else
@@ -2157,7 +2299,7 @@ function setupInventoryGui()
 				u74[string.format("%s_%s", v397, v403.Name)] = v403.Amount;			
 			end;		
 		end;
-		if p40 == LocalPlayer then
+		if p40 == l__LocalPlayer__10 then
 			p41.Parent.Owner.Text = "Your Inventory";
 		else
 			p41.Parent.Owner.Text = string.format("%s's Inventory", p40.Name);
@@ -2176,7 +2318,7 @@ function setupInventoryGui()
 		l__TradeFrame__262.PlayerOfferLabel.Text = string.format("%s's Offer", p42.Name);
 		l__TradeFrame__262.Title.Text = string.format("Trading with: %s", p42.Name);
 		u67 = p43;
-		local v404 = Trades[u67];
+		local v404 = l__Trades__19[u67];
 		v404[p42.Name].Items.ChildAdded:Connect(function(p44)
 			if p44:IsA("IntValue") then
 				local v405 = string.split(p44.Name, "_");
@@ -2221,7 +2363,7 @@ function setupInventoryGui()
 		v404[p42.Name].Accepted:GetPropertyChangedSignal("Value"):Connect(function()
 			l__TradeFrame__262.Confirmation.Visible = v404[p42.Name].Accepted.Value;
 		end);
-		v404[LocalPlayer.Name].Items.ChildAdded:Connect(function(p46)
+		v404[l__LocalPlayer__10.Name].Items.ChildAdded:Connect(function(p46)
 			if p46:IsA("IntValue") then
 				local v409 = string.split(p46.Name, "_");
 				if #v409 ~= 2 then
@@ -2244,7 +2386,7 @@ function setupInventoryGui()
 						v414.Parent = l__TradeFrame__262.LocalOffer;
 						v414.Visible = true;
 						v414.Button.MouseButton1Down:Connect(function()
-							if RemoteFunction:InvokeServer("ChangeOffer", "Remove", u67, p46.Name) == true then
+							if l__RemoteFunction__21:InvokeServer("ChangeOffer", "Remove", u67, p46.Name) == true then
 								if 1 < u68[p46.Name] then
 									if u55[v410][v413].Amount < u74[p46.Name] then
 										local l__Name__415 = p46.Name;
@@ -2302,7 +2444,7 @@ function setupInventoryGui()
 				end;
 			end;
 		end);
-		v404[LocalPlayer.Name].Items.ChildRemoved:Connect(function(p47)
+		v404[l__LocalPlayer__10.Name].Items.ChildRemoved:Connect(function(p47)
 			if l__TradeFrame__262.LocalOffer:FindFirstChild(p47.Name) then
 				l__TradeFrame__262.LocalOffer[p47.Name]:Destroy();
 				l__TradeFrame__262.Accept.Text = "Accept";
@@ -2318,8 +2460,8 @@ function setupInventoryGui()
 		l__RewardFrame__259.ItemFrame.ItemName.TextColor3 = u53[p48.Rarity];
 		if v417 == "ChatTags" then
 			l__RewardFrame__259.ItemFrame.ItemImage.Visible = false;
-			l__RewardFrame__259.ItemFrame.ItemLabel.Text = string.format("[%s]", TagAppearance[v418].TagText);
-			l__RewardFrame__259.ItemFrame.ItemLabel.TextColor3 = TagAppearance[v418].TagColor;
+			l__RewardFrame__259.ItemFrame.ItemLabel.Text = string.format("[%s]", v24[v418].TagText);
+			l__RewardFrame__259.ItemFrame.ItemLabel.TextColor3 = v24[v418].TagColor;
 			l__RewardFrame__259.ItemFrame.ItemLabel.Visible = true;
 		else
 			l__RewardFrame__259.ItemFrame.ItemLabel.Visible = false;
@@ -2332,7 +2474,7 @@ function setupInventoryGui()
 		end;
 		l__RewardFrame__259.Visible = true;
 		local v419 = v264.RewardSound:Clone();
-		v419.Parent = Ignore;
+		v419.Parent = l__Ignore__5;
 		v419.PlayOnRemove = true;
 		v419:Destroy();
 	end;
@@ -2346,7 +2488,7 @@ function setupInventoryGui()
 		l__MessageFrame__260.Visible = false;
 	end);
 	l__Enable__266.MouseButton1Down:Connect(function()
-		local v420 = RemoteFunction:InvokeServer("SetTrading");
+		local v420 = l__RemoteFunction__21:InvokeServer("SetTrading");
 		if v420 == true then
 			l__Enable__266.ImageColor3 = Color3.fromRGB(0, 255, 0);
 			return;
@@ -2356,7 +2498,7 @@ function setupInventoryGui()
 		end;
 	end);
 	local function u84()
-		local v421, v422, v423 = pairs(Players:GetPlayers());
+		local v421, v422, v423 = pairs(l__Players__3:GetPlayers());
 		while true do
 			local v424, v425 = v421(v422, v423);
 			if v424 then
@@ -2365,12 +2507,12 @@ function setupInventoryGui()
 				break;
 			end;
 			v423 = v424;
-			if v425 ~= LocalPlayer then
+			if v425 ~= l__LocalPlayer__10 then
 				local v426 = v264.PlayerFrame:Clone();
-				RunService.Stepped:Wait();
+				l__RunService__1.Stepped:Wait();
 				v426.Parent = l__TradingFrame__79;
 				v426.Name = v425.Name;
-				local v427, v428 = Players:GetUserThumbnailAsync(v425.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100);
+				local v427, v428 = l__Players__3:GetUserThumbnailAsync(v425.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100);
 				v426:WaitForChild("Headshot").Image = v427;
 				v426:WaitForChild("PlayerName").Text = v425.Name;
 				if u19.Incoming[v425] then
@@ -2381,9 +2523,9 @@ function setupInventoryGui()
 				v426.Visible = true;
 				local u85 = false;
 				v426.Load.MouseButton1Down:Connect(function()
-					if not v425:IsDescendantOf(Players) then
+					if not v425:IsDescendantOf(l__Players__3) then
 						if u80[v426] then
-							u81(LocalPlayer, l__InventoryFrame__66);
+							u81(l__LocalPlayer__10, l__InventoryFrame__66);
 						end;
 						if u19.Incoming[v425] then
 							u19.Incoming[v425] = nil;
@@ -2406,7 +2548,7 @@ function setupInventoryGui()
 									u85 = false;
 								end;
 							end)();
-							u81(LocalPlayer, l__InventoryFrame__66);
+							u81(l__LocalPlayer__10, l__InventoryFrame__66);
 							v426.Load.Text = "Load Inventory";
 							u80[v426] = nil;
 							return;
@@ -2445,9 +2587,9 @@ function setupInventoryGui()
 				end);
 				local u86 = false;
 				v426.Request.MouseButton1Down:Connect(function()
-					if not v425:IsDescendantOf(Players) then
+					if not v425:IsDescendantOf(l__Players__3) then
 						if u80[v426] then
-							u81(LocalPlayer, l__InventoryFrame__66);
+							u81(l__LocalPlayer__10, l__InventoryFrame__66);
 						end;
 						if u19.Incoming[v425] then
 							u19.Incoming[v425] = nil;
@@ -2462,7 +2604,7 @@ function setupInventoryGui()
 					if u86 == false then
 						if not u19.Outgoing[v425] then
 							if not u19.Incoming[v425] then
-								if RemoteFunction:InvokeServer("RequestTrade", v425) == true then
+								if l__RemoteFunction__21:InvokeServer("RequestTrade", v425) == true then
 									u86 = true;
 									u19.Outgoing[v425] = v425;
 									v426.Request.Text = "Trade Requested";
@@ -2482,7 +2624,7 @@ function setupInventoryGui()
 									return;
 								end;
 							end;
-							local v434, v435 = RemoteFunction:InvokeServer("StartTrade", v425);
+							local v434, v435 = l__RemoteFunction__21:InvokeServer("StartTrade", v425);
 							if v434 then
 								if v435 then
 									u82(v425, v435);
@@ -2551,19 +2693,19 @@ function setupInventoryGui()
 			end;
 			return;
 		end;
-		if LocalPlayer.Trading.Value == true then
+		if l__LocalPlayer__10.Trading.Value == true then
 			l__Enable__266.ImageColor3 = Color3.fromRGB(0, 255, 0);
-		elseif LocalPlayer.Trading.Value == false then
+		elseif l__LocalPlayer__10.Trading.Value == false then
 			l__Enable__266.ImageColor3 = Color3.fromRGB(255, 0, 0);
 		end;
-		u81(LocalPlayer, l__InventoryFrame__66);
+		u81(l__LocalPlayer__10, l__InventoryFrame__66);
 		u84();
 	end);
 	local u88 = false;
 	l__OddsFrame__261:GetPropertyChangedSignal("Visible"):Connect(function()
 		local v446 = nil;
 		if l__OddsFrame__261.Visible then
-			v446 = RemoteFunction:InvokeServer("GetOdds", u70);
+			v446 = l__RemoteFunction__21:InvokeServer("GetOdds", u70);
 			if v446 then
 
 			else
@@ -2624,8 +2766,8 @@ function setupInventoryGui()
 		l__TradeupFrame__263.Visible = true;
 	end);
 	l__RewardFrame__259.Confirm.MouseButton1Down:Connect(function()
-		if LocalPlayer.Trading.Value == false then
-			RemoteFunction:InvokeServer("SetTrading");
+		if l__LocalPlayer__10.Trading.Value == false then
+			l__RemoteFunction__21:InvokeServer("SetTrading");
 		end;
 		l__RewardFrame__259.Visible = false;
 		l__TradeupFrame__263.Visible = true;
@@ -2633,7 +2775,7 @@ function setupInventoryGui()
 	end);
 	l__TradeFrame__262:GetPropertyChangedSignal("Visible"):Connect(function()
 		if l__TradeFrame__262.Visible == true then
-			u81(LocalPlayer, l__TradeFrame__262.LocalInventory);
+			u81(l__LocalPlayer__10, l__TradeFrame__262.LocalInventory);
 			return;
 		end;
 		if l__TradeFrame__262.Visible == false then
@@ -2664,7 +2806,7 @@ function setupInventoryGui()
 			u78 = true;
 			return;
 		end;
-		if RemoteFunction:InvokeServer("AcceptTrade", u67) == true then
+		if l__RemoteFunction__21:InvokeServer("AcceptTrade", u67) == true then
 			l__TradeFrame__262.Accept.Text = "Accepted";
 			return;
 		end;
@@ -2672,13 +2814,13 @@ function setupInventoryGui()
 		l__TradeFrame__262.Accept.Text = "Failed to accept, restart trade";
 	end);
 	l__TradeFrame__262.Decline.MouseButton1Down:Connect(function()
-		RemoteEvent:FireServer("DeclineTrade", u67);
+		l__RemoteEvent__20:FireServer("DeclineTrade", u67);
 		l__TradeFrame__262.Visible = false;
 	end);
 	l__TradeupFrame__263:GetPropertyChangedSignal("Visible"):Connect(function()
 		if l__TradeupFrame__263.Visible == true then
 			if not u88 then
-				u81(LocalPlayer, l__TradeupFrame__263.LocalInventory);
+				u81(l__LocalPlayer__10, l__TradeupFrame__263.LocalInventory);
 				return;
 			end;
 		end;
@@ -2711,8 +2853,8 @@ function setupInventoryGui()
 		l__Main__257.Visible = true;
 	end);
 	local function u90(p50, p51)
-		if LocalPlayer.Trading.Value == true then
-			RemoteFunction:InvokeServer("SetTrading");
+		if l__LocalPlayer__10.Trading.Value == true then
+			l__RemoteFunction__21:InvokeServer("SetTrading");
 		end;
 		local v470, v471 = getItemInfo(p51.Name);
 		u58(l__CaseFrame__258.CaseScroll);
@@ -2734,8 +2876,8 @@ function setupInventoryGui()
 			v478.ItemName.TextColor3 = u53[v473];
 			if v474 == "ChatTags" then
 				v478.ItemImage.Visible = false;
-				v478.ItemLabel.Text = string.format("[%s]", TagAppearance[v475].TagText);
-				v478.ItemLabel.TextColor3 = TagAppearance[v475].TagColor;
+				v478.ItemLabel.Text = string.format("[%s]", v24[v475].TagText);
+				v478.ItemLabel.TextColor3 = v24[v475].TagColor;
 				v478.ItemLabel.Visible = true;
 			elseif u52[v474][string.lower(v475)] then
 				v478.ItemImage.Image = u52[v474][string.lower(v475)];
@@ -2764,7 +2906,7 @@ function setupInventoryGui()
 		local u93 = nil;
 		local u94 = 30;
 		local u95 = nil;
-		u95 = RunService.RenderStepped:Connect(function(p52)
+		u95 = l__RunService__1.RenderStepped:Connect(function(p52)
 			local v479 = math.clamp(60 * p52, 0, 1);
 			if u91 == false then
 				u91 = true;
@@ -2825,7 +2967,7 @@ function setupInventoryGui()
 			if u93 + 80 <= l__CaseFrame__258.CaseScroll.CanvasPosition.X then
 				u93 = l__CaseFrame__258.CaseScroll.CanvasPosition.X;
 				local v480 = v264.Dash:Clone();
-				v480.Parent = Ignore;
+				v480.Parent = l__Ignore__5;
 				v480.PlayOnRemove = true;
 				v480:Destroy();
 			end;
@@ -2848,7 +2990,7 @@ function setupInventoryGui()
 			return;
 		end;
 		u71 = true;
-		local v481, v482, v483 = RemoteFunction:InvokeServer("Tradeup", u70);
+		local v481, v482, v483 = l__RemoteFunction__21:InvokeServer("Tradeup", u70);
 		if v481 then
 
 		else
@@ -2895,7 +3037,7 @@ function setupInventoryGui()
 			if u57 ~= v488 then
 				if u54 == true then
 					u58(l__TradeFrame__262.LocalInventory.Items);
-					u75(v488, LocalPlayer, l__TradeFrame__262.LocalInventory);
+					u75(v488, l__LocalPlayer__10, l__TradeFrame__262.LocalInventory);
 				end;
 			end;
 		end);
@@ -2903,12 +3045,12 @@ function setupInventoryGui()
 			if u57 ~= v488 then
 				if u54 == true then
 					u58(l__TradeupFrame__263.LocalInventory.Items);
-					u75(v488, LocalPlayer, l__TradeupFrame__263.LocalInventory);
+					u75(v488, l__LocalPlayer__10, l__TradeupFrame__263.LocalInventory);
 				end;
 			end;
 		end);	
 	end;
-	RemoteEvent.OnClientEvent:Connect(function(...)
+	l__RemoteEvent__20.OnClientEvent:Connect(function(...)
 		local v489 = { ... };
 		local v490 = v489[1];
 		if v490 == "InitiateTrade" then
@@ -2920,8 +3062,8 @@ function setupInventoryGui()
 			end;
 			return;
 		end;
-		if v489[2]:IsDescendantOf(Players) then
-			if not Trades:FindFirstChild(v489[3]) then
+		if v489[2]:IsDescendantOf(l__Players__3) then
+			if not l__Trades__19:FindFirstChild(v489[3]) then
 				return;
 			end;
 		else
@@ -2929,7 +3071,7 @@ function setupInventoryGui()
 		end;
 		u82(v489[2], v489[3]);
 	end);
-	Players.PlayerRemoving:Connect(function(p53)
+	l__Players__3.PlayerRemoving:Connect(function(p53)
 		if u19.Incoming[p53] then
 			u19.Incoming[p53] = nil;
 		end;
@@ -2938,8 +3080,8 @@ function setupInventoryGui()
 		end;
 	end);
 	if u18 == false then
-		if Workspace.CurrentCamera.ViewportSize.X < 1000 then
-			if Workspace.CurrentCamera.ViewportSize.Y < 1000 then
+		if l__Workspace__9.CurrentCamera.ViewportSize.X < 1000 then
+			if l__Workspace__9.CurrentCamera.ViewportSize.Y < 1000 then
 				l__Main__257.Size = UDim2.new(0, l__Main__257.Size.X.Offset * 0.5, 0, l__Main__257.Size.Y.Offset * 0.5);
 				l__Main__257.Position = UDim2.new(0.5, -l__Main__257.Size.X.Offset / 2, 0.5, -l__Main__257.Size.Y.Offset / 2);
 				v264.Item.ItemLabel.TextSize = 10;
@@ -3021,7 +3163,7 @@ function setupLeaderboardGui()
 		u98();
 		l__Placeholder__99.Visible = true;
 		u100 = p54;
-		local v510, v511, v512 = pairs(Players:GetPlayers());
+		local v510, v511, v512 = pairs(l__Players__3:GetPlayers());
 		while true do
 			local v513, v514 = v510(v511, v512);
 			if v513 then
@@ -3035,15 +3177,15 @@ function setupLeaderboardGui()
 				break;
 			end;
 			if p54 == "Ping" then
-				if PingCounts:FindFirstChild(v514.Name) then
-					local v515 = PingCounts:FindFirstChild(v514.Name).Value;
+				if l__PingCounts__18:FindFirstChild(v514.Name) then
+					local v515 = l__PingCounts__18:FindFirstChild(v514.Name).Value;
 				else
 					v515 = "???";
 				end;
 			else
 				v515 = v514:WaitForChild("leaderstats"):FindFirstChild(p54).Value;
 			end;
-			local v516, v517 = Players:GetUserThumbnailAsync(v514.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100);
+			local v516, v517 = l__Players__3:GetUserThumbnailAsync(v514.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100);
 			local v518 = v496.Item:Clone();
 			if typeof(v515) == "number" then
 				v518.LayoutOrder = -v515;
@@ -3057,8 +3199,8 @@ function setupLeaderboardGui()
 			v518.PlayerName.Text = v514.Name;
 			v518.Value.Text = p54;
 			if p54 == "Ping" then
-				if PingCounts:FindFirstChild(v514.Name) then
-					local v519 = PingCounts:FindFirstChild(v514.Name);
+				if l__PingCounts__18:FindFirstChild(v514.Name) then
+					local v519 = l__PingCounts__18:FindFirstChild(v514.Name);
 					table.insert(u96, (v519:GetPropertyChangedSignal("Value"):Connect(function()
 						v518.Counter.Text = v519.Value;
 					end)));
@@ -3121,8 +3263,8 @@ function setupLeaderboardGui()
 		end;
 	end);
 	if u18 == false then
-		if Workspace.CurrentCamera.ViewportSize.X < 1000 then
-			if Workspace.CurrentCamera.ViewportSize.Y < 1000 then
+		if l__Workspace__9.CurrentCamera.ViewportSize.X < 1000 then
+			if l__Workspace__9.CurrentCamera.ViewportSize.Y < 1000 then
 				v496.Item.Headshot.Size = UDim2.new(0, v496.Item.Headshot.Size.X.Offset * 0.5, 0, v496.Item.Headshot.Size.Y.Offset * 0.5);
 				v496.Item.Headshot.Position = UDim2.new(0, 0, 0.5, -(v496.Item.Headshot.Size.Y.Offset / 2));
 				l__Main__495.Size = UDim2.new(0, l__Main__495.Size.X.Offset * 0.5, 0, l__Main__495.Size.Y.Offset * 0.5);
@@ -3176,8 +3318,8 @@ function setupShopGui()
 		l__RewardFrame__541.ItemFrame.ItemName.TextColor3 = u53[p56.Rarity];
 		if v551 == "ChatTags" then
 			l__RewardFrame__541.ItemFrame.ItemImage.Visible = false;
-			l__RewardFrame__541.ItemFrame.ItemLabel.Text = string.format("[%s]", TagAppearance[v552].TagText);
-			l__RewardFrame__541.ItemFrame.ItemLabel.TextColor3 = TagAppearance[v552].TagColor;
+			l__RewardFrame__541.ItemFrame.ItemLabel.Text = string.format("[%s]", v24[v552].TagText);
+			l__RewardFrame__541.ItemFrame.ItemLabel.TextColor3 = v24[v552].TagColor;
 			l__RewardFrame__541.ItemFrame.ItemLabel.Visible = true;
 		else
 			l__RewardFrame__541.ItemFrame.ItemLabel.Visible = false;
@@ -3190,7 +3332,7 @@ function setupShopGui()
 		end;
 		l__RewardFrame__541.Visible = true;
 		local v553 = v542.RewardSound:Clone();
-		v553.Parent = Ignore;
+		v553.Parent = l__Ignore__5;
 		v553.PlayOnRemove = true;
 		v553:Destroy();
 	end;
@@ -3206,8 +3348,8 @@ function setupShopGui()
 	local u113 = nil;
 	local u114 = false;
 	local function u115(p57, p58)
-		if LocalPlayer.Trading.Value == true then
-			RemoteFunction:InvokeServer("SetTrading");
+		if l__LocalPlayer__10.Trading.Value == true then
+			l__RemoteFunction__21:InvokeServer("SetTrading");
 		end;
 		local l__CaseItems__554 = l__ShopItems__101.Cases[p57].CaseItems;
 		local v555, v556 = getItemInfo(p58.Name);
@@ -3423,8 +3565,8 @@ function setupShopGui()
 			v564.ItemName.TextColor3 = u53[v558];
 			if v560 == "ChatTags" then
 				v564.ItemImage.Visible = false;
-				v564.ItemLabel.Text = string.format("[%s]", TagAppearance[v561].TagText);
-				v564.ItemLabel.TextColor3 = TagAppearance[v561].TagColor;
+				v564.ItemLabel.Text = string.format("[%s]", v24[v561].TagText);
+				v564.ItemLabel.TextColor3 = v24[v561].TagColor;
 				v564.ItemLabel.Visible = true;
 			elseif u52[v560][string.lower(v561)] then
 				v564.ItemImage.Image = u52[v560][string.lower(v561)];
@@ -3453,7 +3595,7 @@ function setupShopGui()
 		local u118 = nil;
 		local u119 = 30;
 		local u120 = nil;
-		u120 = RunService.RenderStepped:Connect(function(p59)
+		u120 = l__RunService__1.RenderStepped:Connect(function(p59)
 			local v565 = math.clamp(60 * p59, 0, 1);
 			if u116 == false then
 				u116 = true;
@@ -3514,7 +3656,7 @@ function setupShopGui()
 			if u118 + 80 <= l__CaseFrame__535.CaseScroll.CanvasPosition.X then
 				u118 = l__CaseFrame__535.CaseScroll.CanvasPosition.X;
 				local v566 = v542.Dash:Clone();
-				v566.Parent = Ignore;
+				v566.Parent = l__Ignore__5;
 				v566.PlayOnRemove = true;
 				v566:Destroy();
 			end;
@@ -3635,7 +3777,7 @@ function setupShopGui()
 					u105 = true;
 					return;
 				end;
-				local v579, v580 = RemoteFunction:InvokeServer("PurchaseCase", p62);
+				local v579, v580 = l__RemoteFunction__21:InvokeServer("PurchaseCase", p62);
 				if v579 == true then
 
 				else
@@ -3666,14 +3808,14 @@ function setupShopGui()
 		if p61 == "Product" then
 			u121 = p62;
 			u113 = function()
-				MarketplaceService:PromptProductPurchase(LocalPlayer, p62);
+				l__MarketplaceService__5:PromptProductPurchase(l__LocalPlayer__10, p62);
 			end;
 			return;
 		end;
 		if p61 == "Minigame" then
 			u122 = p62;
-			u123 = MinigameData[p62].Maps[1];
-			u124 = MinigameData[p62].Modes[1];
+			u123 = v23[p62].Maps[1];
+			u124 = v23[p62].Modes[1];
 			u113 = function()
 				if u114 == true then
 					return;
@@ -3705,7 +3847,7 @@ function setupShopGui()
 					u105 = true;
 					return;
 				end;
-				local v582, v583 = RemoteFunction:InvokeServer("PurchaseMinigame", u122, u123, u124);
+				local v582, v583 = l__RemoteFunction__21:InvokeServer("PurchaseMinigame", u122, u123, u124);
 				if v582 == true then
 					l__Purchase__106.Text = "Purchased!";
 					u114 = true;
@@ -3744,7 +3886,7 @@ function setupShopGui()
 					u132 = true;
 					l__CodeFrame__536.CodeInput.TextEditable = false;
 					l__CodeFrame__536.CodeInput.Text = "";
-					if RemoteFunction:InvokeServer("RedeemCode", l__CodeFrame__536.CodeInput.Text) then
+					if l__RemoteFunction__21:InvokeServer("RedeemCode", l__CodeFrame__536.CodeInput.Text) then
 						l__CodeFrame__536.CodeInput.PlaceholderText = "Redeemed!";
 						l__CodeFrame__536.CodeInput.PlaceholderColor3 = Color3.new(0, 1, 0);
 					else
@@ -3767,7 +3909,7 @@ function setupShopGui()
 		l__Main__537.Visible = false;
 	end);
 	l__GiftFrame__538.Close.MouseButton1Down:Connect(function()
-		RemoteFunction:InvokeServer("SetGifting", nil);
+		l__RemoteFunction__21:InvokeServer("SetGifting", nil);
 		l__GiftFrame__538.Visible = false;
 		l__Main__537.Visible = true;
 	end);
@@ -3785,9 +3927,9 @@ function setupShopGui()
 			end);
 			return;
 		end;
-		if RemoteFunction:InvokeServer("SetGifting", u125) then
+		if l__RemoteFunction__21:InvokeServer("SetGifting", u125) then
 			if userIdInGame(u125) then
-				MarketplaceService:PromptProductPurchase(LocalPlayer, u121);
+				l__MarketplaceService__5:PromptProductPurchase(l__LocalPlayer__10, u121);
 				return;
 			end;
 		end;
@@ -3803,8 +3945,8 @@ function setupShopGui()
 		l__Main__537.Visible = true;
 	end);
 	l__RewardFrame__541.Confirm.MouseButton1Down:Connect(function()
-		if LocalPlayer.Trading.Value == false then
-			RemoteFunction:InvokeServer("SetTrading");
+		if l__LocalPlayer__10.Trading.Value == false then
+			l__RemoteFunction__21:InvokeServer("SetTrading");
 		end;
 		u35 = false;
 		l__RewardFrame__541.Visible = false;
@@ -3819,7 +3961,7 @@ function setupShopGui()
 		u102(l__GiftFrame__538.Players);
 		l__GiftFrame__538.Headshot.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png";
 		l__GiftFrame__538.Username.Text = "No-one!";
-		local v584, v585, v586 = pairs(Players:GetPlayers());
+		local v584, v585, v586 = pairs(l__Players__3:GetPlayers());
 		while true do
 			local v587, v588 = v584(v585, v586);
 			if v587 then
@@ -3828,7 +3970,7 @@ function setupShopGui()
 				break;
 			end;
 			v586 = v587;
-			if v588 ~= LocalPlayer then
+			if v588 ~= l__LocalPlayer__10 then
 				local v589 = v542.SettingsItem:Clone();
 				v589.Parent = l__GiftFrame__538.Players;
 				v589.Button.Text = v588.Name;
@@ -3836,7 +3978,7 @@ function setupShopGui()
 				local l__UserId__135 = v588.UserId;
 				v589.Button.MouseButton1Down:Connect(function()
 					u125 = l__UserId__135;
-					local v590, v591 = Players:GetUserThumbnailAsync(v588.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100);
+					local v590, v591 = l__Players__3:GetUserThumbnailAsync(v588.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100);
 					l__GiftFrame__538.Headshot.Image = v590;
 					l__GiftFrame__538.Username.Text = v588.Name;
 					v589.Button.TextColor3 = Color3.new(0, 255, 0);
@@ -3888,8 +4030,8 @@ function setupShopGui()
 				local v609 = v542.Item:Clone();
 				if v607 == "ChatTags" then
 					v609.ItemImage.Visible = false;
-					v609.ItemLabel.Text = string.format("[%s]", TagAppearance[v608].TagText);
-					v609.ItemLabel.TextColor3 = TagAppearance[v608].TagColor;
+					v609.ItemLabel.Text = string.format("[%s]", v24[v608].TagText);
+					v609.ItemLabel.TextColor3 = v24[v608].TagColor;
 					if 7 < string.len(v609.ItemLabel.Text) then
 						v609.ItemLabel.TextScaled = true;
 						if string.find(v609.ItemLabel.Text, " ") then
@@ -3936,7 +4078,7 @@ function setupShopGui()
 	local function u137(p66)
 		u102(l__SettingsFrame__540.Maps);
 		u102(l__SettingsFrame__540.Modes);
-		local v610 = MinigameData[p66];
+		local v610 = v23[p66];
 		l__SettingsFrame__540.MinigameImage.Image = u52.Minigames[p66:lower()];
 		l__SettingsFrame__540.MinigameName.Text = p66;
 		local v611, v612, v613 = pairs(v610.Maps);
@@ -4274,8 +4416,8 @@ function setupShopGui()
 		end;
 		u138(u112);
 	end);
-	TouchPart.Touched:Connect(function(p68)
-		if Players:GetPlayerFromCharacter(p68.Parent) == LocalPlayer then
+	l__TouchPart__13.Touched:Connect(function(p68)
+		if l__Players__3:GetPlayerFromCharacter(p68.Parent) == l__LocalPlayer__10 then
 			if l__Main__537.Visible == false then
 				l__Main__537.Visible = true;
 				u138("Donations");
@@ -4308,7 +4450,7 @@ function setupShopGui()
 			end;
 		end);	
 	end;
-	RemoteEvent.OnClientEvent:Connect(function(...)
+	l__RemoteEvent__20.OnClientEvent:Connect(function(...)
 		local v655 = { ... };
 		local v656 = v655[1];
 		if v656 == "UpdateCoins" then
@@ -4319,10 +4461,10 @@ function setupShopGui()
 			l__Info__30:WaitForChild("GiftedFrame"):WaitForChild("Amount").Text = tostring(v655[2]);
 		end;
 	end);
-	RemoteEvent:FireServer("GetCoins");
+	l__RemoteEvent__20:FireServer("GetCoins");
 	if u18 == false then
-		if Workspace.CurrentCamera.ViewportSize.X < 1000 then
-			if Workspace.CurrentCamera.ViewportSize.Y < 1000 then
+		if l__Workspace__9.CurrentCamera.ViewportSize.X < 1000 then
+			if l__Workspace__9.CurrentCamera.ViewportSize.Y < 1000 then
 				l__Main__537.Size = UDim2.new(0, l__Main__537.Size.X.Offset * 0.5, 0, l__Main__537.Size.Y.Offset * 0.5);
 				l__Main__537.Position = UDim2.new(0.5, -l__Main__537.Size.X.Offset / 2, 0.5, -l__Main__537.Size.Y.Offset / 2);
 				l__GiftFrame__538.Size = UDim2.new(0, l__GiftFrame__538.Size.X.Offset * 0.6666666666666666, 0, l__GiftFrame__538.Size.Y.Offset * 0.6666666666666666);

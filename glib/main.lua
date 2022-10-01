@@ -610,8 +610,12 @@ function lib:Main()
                 end
             end
         end)
+		function mod:Set(v)
+			mod.key = v
+		end
 		function mod:ChangeKey(k)
 			mod.key = k
+			mod:Set(k)
 		end
 		return mod
 	end
@@ -711,7 +715,7 @@ function lib:Main()
 				cpar.Call.Font = Enum.Font.SourceSans
 				cpar.Call.Text = ""
 				cpar.Call.TextColor3 = Color3.fromRGB(0, 0, 0)
-				cpar.Call.TextSize = 14.000
+				cpar.Call.TextSize = 17
 				cpar.Call.MouseButton1Click:Connect(function() callback() end)
 			end
 			function cmn:Toggle(c_title,status)
@@ -780,7 +784,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextSize = 14.000
+				cpar.Title.TextSize = 17
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -876,8 +880,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextScaled = true
-				cpar.Title.TextSize = 14.000
+				cpar.Title.TextSize = 17
 				cpar.Title.Text = tostring(c_title)
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left

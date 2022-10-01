@@ -597,8 +597,11 @@ function lib:Main()
 	
 	--
 	function mn:BaseKey(keyname)
+		local mod = {
+			key = keyname
+		}
 		game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(key)
-            if key:lower() == keyname then
+            if key:lower() == mod.key then
                 if mn.Base.Visible == false then
                     mn.Base.Visible = true
 				end
@@ -607,6 +610,10 @@ function lib:Main()
                 end
             end
         end)
+		function mod:ChangeKey(k)
+			mod.key = k
+		end
+		return mod
 	end
 	function mn:Category(c_title)
 		local number = 0
@@ -945,6 +952,9 @@ function lib:Main()
 			end
 			return cmn
 		end
+	end
+	for _,v in pairs(mn.Objects:GetChildren()) do
+		mn._436c6f736543617465676f7279(v)
 	end
 	mn.Base.Visible = true
 	return mn

@@ -31,3 +31,4 @@ task.wait(1)
 game:GetService('TweenService'):Create(Frame, TweenInfo.new(1), {Size = UDim2.new(0, 1, 0, 1)}):Play()
 task.wait(1)
 Frame.BackgroundTransparency = 1
+ScreenGui:Destroy()

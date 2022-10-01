@@ -9,7 +9,7 @@ local UserInputService = game:GetService("UserInputService");
 local HttpService = game:GetService("HttpService");
 local SoundService = game:GetService("SoundService");
 local Workspace = game:GetService("Workspace");
-local LocalPlayer = Players.LocalPlayer;
+local LocalPlayer = game.Players.LocalPlayer;
 local VIPRoom = Workspace:WaitForChild("VIPRoom");
 local WaitingRoom = Workspace:WaitForChild("WaitingRoom");
 local TouchPart = WaitingRoom:WaitForChild("DonationArea"):WaitForChild("Booth"):WaitForChild("TouchPart");
@@ -102,9 +102,6 @@ end;
 function getItemInfo(p2)
 	local v37 = string.split(p2, "_");
 	return v37[1], v37[2];
-end;
-function kick(p3)
-	-- pass
 end;
 local Ignore = SoundService:WaitForChild("Ignore");
 function playSound(p4, p5)
@@ -216,60 +213,7 @@ LocalPlayer.CharacterAdded:Connect(function(p10)
 		v59:Disconnect();
 		table.remove(u11, table.find(u11, v59));
 	end;
-	local l__Humanoid__60 = p10:WaitForChild("Humanoid");
-	local v61 = p10.ChildAdded:Connect(function(p11)
-		if p11.Name == "NoJump" then
-			local u12 = nil;
-			u12 = p11.Changed:Connect(function()
-				if p11.Disabled == true then
-					u12:Disconnect();
-					kick("nojump disabled");
-				end;
-			end);
-			table.insert(u11, u12);
-			return;
-		end;
-		if p11.Name == "Freeze" then
-			local u13 = nil;
-			u13 = p11.Changed:Connect(function()
-				if p11.Disabled == true then
-					u13:Disconnect();
-					kick("freeze disabled");
-				end;
-			end);
-			table.insert(u11, u13);
-			return;
-		end;
-		if p11.Name == "Bomb" and p11:IsA("Tool") and p11:FindFirstChild("Handle") and p11:FindFirstChild("FirePart") then
-			local u14 = nil;
-			u14 = p11.Changed:Connect(function()
-				if p11.GripPos ~= Vector3.new(0, 0, 0) then
-					u14:Disconnect();
-					kick("grip");
-				end;
-			end);
-			local u15 = nil;
-			u15 = p11.Handle.Changed:Connect(function()
-				if p11:FindFirstChild("Handle") and p11.Handle.Size ~= Vector3.new(2, 2, 2) then
-					u15:Disconnect();
-					kick("size");
-				end;
-			end);
-			table.insert(u11, u14);
-			table.insert(u11, u15);
-			return;
-		end;
-		if p11.Name == "ClassicSword" and p11:IsA("Tool") and p11:FindFirstChild("Handle") and p11:FindFirstChild("MouseIcon") then
-			local u16 = nil;
-			u16 = p11.Handle.Changed:Connect(function()
-				if p11.Handle and p11.Handle.Size ~= Vector3.new(1, 0.8, 4) then
-					u16:Disconnect();
-					kick("size");
-				end;
-			end);
-			table.insert(u11, u16);
-		end;
-	end);
+	local Humanoid = p10:WaitForChild("Humanoid");
 	local v62 = p10.DescendantAdded:Connect(function(p12)
 		if not (not p12:IsA("BodyThrust")) or not (not p12:IsA("BodyVelocity")) or not (not p12:IsA("BodyGyro")) or not (not p12:IsA("BodyPosition")) or not (not p12:IsA("BodyAngularVelocity")) or p12:IsA("BodyForce") then
 			if p12:IsA("BodyVelocity") and p12:GetAttribute("ServerVelocity") == true then
@@ -282,69 +226,27 @@ LocalPlayer.CharacterAdded:Connect(function(p10)
 			end;
 		end;
 	end);
-	local v63 = l__Humanoid__60.Changed:Connect(function()
+	local v63 = Humanoid.Changed:Connect(function()
 		if LocalPlayer.Team and LocalPlayer.Team.Name == "Freezer" then
-			if l__Humanoid__60.WalkSpeed ~= 22 and l__Humanoid__60.WalkSpeed ~= 0 then
-				l__Humanoid__60.WalkSpeed = 22;
+			if Humanoid.WalkSpeed ~= shared.azurite_custom_minigames.FreezerSpeed and Humanoid.WalkSpeed ~= 0 then
+				Humanoid.WalkSpeed = shared.azurite_custom_minigames.FreezerSpeed;
 				return;
 			end;
 		else
-			if l__Humanoid__60.WalkSpeed ~= 16 and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") == nil then
-				l__Humanoid__60.WalkSpeed = 16;
-			elseif l__Humanoid__60.WalkSpeed ~= 18 and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") ~= nil then
-				l__Humanoid__60.WalkSpeed = 18;
-			elseif l__Humanoid__60.WalkSpeed ~= 16 and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") == nil then
-				l__Humanoid__60.WalkSpeed = 16;
-			end;
-			if l__Humanoid__60.JumpPower ~= 50 and l__Humanoid__60.JumpPower ~= 0 then
-				l__Humanoid__60.JumpPower = 50;
-			end;
-			if l__Humanoid__60.HipHeight ~= 0 then
-				l__Humanoid__60.HipHeight = 0;
+			if Humanoid.WalkSpeed ~= shared.azurite_custom_minigames.BombSpeed and Humanoid.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") ~= nil then
+				Humanoid.WalkSpeed = shared.azurite_custom_minigames.BombSpeed;
+			elseif Humanoid.WalkSpeed ~= shared.azurite_custom_minigames.NoBombSpeed and Humanoid.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") == nil then
+				Humanoid.WalkSpeed = shared.azurite_custom_minigames.NoBombSpeed;
 			end;
 		end;
 	end);
 	table.insert(u11, (p10.ChildRemoved:Connect(function(p13)
-		if p13.Name == "NoJump" and LocalPlayer.Team ~= nil then
-			kick("nojump");
-			return;
-		end;
-		if p13.Name == "Freeze" and LocalPlayer.Team ~= nil then
-			kick("freeze");
-			return;
-		end;
 		if p13.Name == "Humanoid" then
 			LocalPlayer:LoadCharacter();
 		end;
 	end)));
 	table.insert(u11, v61);
 	table.insert(u11, v63);
-end);
-PlayerScripts.ChildRemoved:Connect(function(p14)
-	if p14.Name == "LocalScript" then
-		kick("tampering");
-	end;
-end);
-LocalScript.Changed:Connect(function()
-	if LocalScript.Disabled == true then
-		kick("disabled");
-	end;
-	if LocalScript.Parent ~= PlayerScripts then
-		kick("trying 2 bypass");
-	end;
-end);
-ReplicatedStorage.DescendantRemoving:Connect(function(p15)
-	if p15.Parent:IsA("RemoteEvent") or p15.Parent.Name == "Events" then
-		kick("removing stuff from replicatedstorage (or server shut down)");
-	end;
-end);
-Events.Changed:Connect(function()
-	if Events.Name ~= "Events" then
-		kick("renamed events");
-	end;
-end);
-Events.ChildRemoved:Connect(function(p16)
-	kick("remove events");
 end);
 HB:GetPropertyChangedSignal("Value"):Connect(function()
 	if HB.Value == true then
@@ -354,48 +256,7 @@ end);
 if HB.Value == true then
 	coroutine.resume(updateServerHitboxes);
 end;
-for v64, v65 in pairs(Events:GetChildren()) do
-	local l__Name__17 = v65.Name;
-	v65.Changed:Connect(function()
-		if v65.Name ~= l__Name__17 then
-			kick("Illegal Property Change");
-		end;
-	end);
-	v65.ChildRemoved:Connect(function()
-		kick("Restricted Child Removal");
-	end);
-end;
-VIPRoom:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Size"):Connect(function()
-	if VIPRoom:WaitForChild("RoomCatch").Size ~= Vector3.new(71, 15, 71) then
-		kick("vip tamper");
-	end;
-end);
-VIPRoom:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Position"):Connect(function()
-	if VIPRoom:WaitForChild("RoomCatch").Position ~= Vector3.new(6.289, 32.16, 36.54) then
-		kick("vip tamper");
-	end;
-end);
-VIPRoom:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Orientation"):Connect(function()
-	if VIPRoom:WaitForChild("RoomCatch").Orientation ~= Vector3.new(0, 0, 0) then
-		kick("vip tamper");
-	end;
-end);
-for v66, v67 in pairs(WaitingRoom:WaitForChild("VIPElevator"):WaitForChild("Block"):GetChildren()) do
-	v67.TextButton.Activated:Connect(function()
-		MarketplaceService:PromptGamePassPurchase(LocalPlayer, 10967481);
-	end);
-end;
-WaitingRoom.DescendantRemoving:Connect(function(p17)
-	if p17:IsA("BasePart") and p17.Anchored == true then
-		print(p17, p17.Anchored, p17.Parent);
-		kick("waitingroom removing part");
-	end;
-end);
-script.Changed:Connect(function()
-	if script.Parent ~= PlayerScripts then
-		kick("Illegal Property Change");
-	end;
-end);
+
 local u18 = true;
 local u19 = {
 	Incoming = {}, 
@@ -520,15 +381,6 @@ function RemoteFunction.OnClientInvoke(...)
 	end;
 	return (v73[2].Position - v73[3].Position).Magnitude;
 end;
-task.delay(10, function()
-	while true do
-		local v75 = tick();
-		task.wait(1);
-		if tick() - v75 > 3 then
-			LocalPlayer:Kick("possible freeze glitch");
-		end;	
-	end;
-end);
 if UserInputService.TouchEnabled or UserInputService.GamepadEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled then
 	u18 = false;
 end;

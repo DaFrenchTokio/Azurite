@@ -659,9 +659,6 @@ function lib:Main()
 					end
 				end
 			end)
-			for _,v in pairs(mn.Objects:GetChildren()) do
-				mn._436c6f736543617465676f7279(v)
-			end
 			table.insert(mn.table_category, _1.Name)
 			
 			function cmn:Button(c_title,caller)
@@ -678,6 +675,7 @@ function lib:Main()
 				cpar.Base.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 				cpar.Base.Size = UDim2.new(0, 450, 0, 35)
 				cpar.Base.ZIndex = 2
+				cpar.Base.Visible = false
 
 				cpar.UICorner.Parent = cpar.Base
 
@@ -699,7 +697,6 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextScaled = true
 				cpar.Title.TextSize = 14.000
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -757,6 +754,7 @@ function lib:Main()
 				cpar.Base.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 				cpar.Base.Size = UDim2.new(0, 450, 0, 35)
 				cpar.Base.ZIndex = 2
+				cpar.Base.Visible = false
 
                 cpar.UIStroke.Parent = cpar.toggle
                 cpar.UIStroke.Name = "Stroke"
@@ -782,7 +780,6 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextScaled = true
 				cpar.Title.TextSize = 14.000
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -844,6 +841,7 @@ function lib:Main()
 				cpar.Base.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 				cpar.Base.Size = UDim2.new(0, 450, 0, 35)
 				cpar.Base.ZIndex = 2
+				cpar.Base.Visible = false
 
                 cpar.UIStroke.Parent = cpar.Stroke
                 cpar.UIStroke.Name = "Stroke"
@@ -880,6 +878,7 @@ function lib:Main()
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 				cpar.Title.TextScaled = true
 				cpar.Title.TextSize = 14.000
+				cpar.Title.Text = tostring(c_title)
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -921,7 +920,6 @@ function lib:Main()
 				cpar.Value.Font = Enum.Font.TitilliumWeb
 				cpar.Value.Text = tostring(min)
 				cpar.Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Value.TextScaled = true
 				cpar.Value.TextSize = 14.000
 				cpar.Value.TextWrapped = true
 

@@ -785,6 +785,7 @@ function lib:Main()
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
 				cpar.Title.TextSize = 20
+				cpar.Title.Text = tostring(c_title)
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
 

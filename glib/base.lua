@@ -604,8 +604,7 @@ function lib:Main()
             if key:lower() == mod.key then
                 if mn.Base.Visible == false then
                     mn.Base.Visible = true
-				end
-                if mn.Base.Visible == true then
+				elseif mn.Base.Visible == true then
                     mn.Base.Visible = false
                 end
             end
@@ -701,7 +700,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextSize = 20
+				cpar.Title.TextSize = 22
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
 				cpar.Title.Text = tostring(c_title)
@@ -784,7 +783,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextSize = 20
+				cpar.Title.TextSize = 22
 				cpar.Title.Text = tostring(c_title)
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left
@@ -881,7 +880,7 @@ function lib:Main()
 				cpar.Title.ZIndex = 2
 				cpar.Title.Font = Enum.Font.TitilliumWeb
 				cpar.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-				cpar.Title.TextSize = 20
+				cpar.Title.TextSize = 22
 				cpar.Title.Text = tostring(c_title)
 				cpar.Title.TextWrapped = true
 				cpar.Title.TextXAlignment = Enum.TextXAlignment.Left

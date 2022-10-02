@@ -9,12 +9,11 @@ local l__UserInputService__6 = game:GetService("UserInputService");
 local l__HttpService__7 = game:GetService("HttpService");
 local l__SoundService__8 = game:GetService("SoundService");
 local l__Workspace__9 = game:GetService("Workspace");
-local l__LocalPlayer__10 = l__Players__3.LocalPlayer;
+local l__LocalPlayer__10 = game:GetService("Players").LocalPlayer;
 local l__VIPRoom__11 = l__Workspace__9:WaitForChild("VIPRoom");
 local l__WaitingRoom__12 = l__Workspace__9:WaitForChild("WaitingRoom");
 local l__TouchPart__13 = l__WaitingRoom__12:WaitForChild("DonationArea"):WaitForChild("Booth"):WaitForChild("TouchPart");
 local l__PlayerScripts__14 = l__LocalPlayer__10:WaitForChild("PlayerScripts");
-local l__LocalScript__15 = l__PlayerScripts__14:WaitForChild("LocalScript");
 local l__Modules__16 = game:GetService("ReplicatedFirst"):WaitForChild("Modules");
 local l__Events__17 = l__ReplicatedStorage__4:WaitForChild("Events");
 local l__PingCounts__18 = l__ReplicatedStorage__4:WaitForChild("PingCounts");
@@ -41,11 +40,9 @@ updateServerHitboxes = coroutine.create(function()
 			["Right Leg"] = true
 		};
 		local v27, v28, v29 = pairs((l__LocalPlayer__10.Character or l__LocalPlayer__10.CharacterAdded:Wait()):GetChildren());
-		while true do
+		while true do wait()
 			local v30, v31 = v27(v28, v29);
-			if v30 then
-
-			else
+			if not v30 then
 				break;
 			end;
 			v29 = v30;
@@ -60,11 +57,9 @@ local l__PlayerGui__3 = l__LocalPlayer__10:WaitForChild("PlayerGui");
 local u4 = { "Info", "Inventory", "Leaderboard", "Panel", "Shop" };
 function closeOtherGuis(p1)
 	local v32, v33, v34 = pairs(l__PlayerGui__3:GetChildren());
-	while true do
+	while true do wait()
 		local v35, v36 = v32(v33, v34);
-		if v35 then
-
-		else
+		if not v35 then
 			break;
 		end;
 		v34 = v35;
@@ -142,11 +137,9 @@ function hidePlayers()
 		end;
 	end;
 	local v41, v42, v43 = pairs(l__Players__3:GetPlayers());
-	while true do
+	while true do wait()
 		local v44, v45 = v41(v42, v43);
-		if v44 then
-
-		else
+		if not v44 then
 			break;
 		end;
 		v43 = v44;
@@ -163,11 +156,9 @@ end;
 function unhidePlayers()
 	u6 = false;
 	local v46, v47, v48 = pairs(l__HiddenPlayers__7:GetChildren());
-	while true do
+	while true do wait()
 		local v49, v50 = v46(v47, v48);
-		if v49 then
-
-		else
+		if not v49 then
 			break;
 		end;
 		v48 = v49;
@@ -176,11 +167,9 @@ function unhidePlayers()
 end;
 function userIdInGame(p9)
 	local v51, v52, v53 = pairs(l__Players__3:GetPlayers());
-	while true do
+	while true do wait()
 		local v54, v55 = v51(v52, v53);
-		if v54 then
-
-		else
+		if not v54 then
 			break;
 		end;
 		v53 = v54;
@@ -283,20 +272,7 @@ l__LocalPlayer__10.CharacterAdded:Connect(function(p10)
 		end;
 	end);
 	local v63 = l__Humanoid__60.Changed:Connect(function()
-		if l__LocalPlayer__10.Team and l__LocalPlayer__10.Team.Name == "Freezer" then
-			if l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.FreezerSpeed and l__Humanoid__60.WalkSpeed ~= 0 then
-				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.FreezerSpeed;
-				return;
-			end;
-		else
-			if l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.NoBombSpeed and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") == nil then
-				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.NoBombSpeed;
-			elseif l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.BombSpeed and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") ~= nil then
-				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.BombSpeed;
-			elseif l__Humanoid__60.WalkSpeed ~= shared.azurite_custom_minigames.NoBombSpeed and l__Humanoid__60.WalkSpeed ~= 0 and p10:FindFirstChild("NoJump") ~= nil and p10:FindFirstChild("Bomb") == nil then
-				l__Humanoid__60.WalkSpeed = shared.azurite_custom_minigames.NoBombSpeed;
-			end;
-		end;
+		
 	end);
 	table.insert(u11, (p10.ChildRemoved:Connect(function(p13)
 		if p13.Name == "NoJump" and l__LocalPlayer__10.Team ~= nil then
@@ -313,19 +289,6 @@ l__LocalPlayer__10.CharacterAdded:Connect(function(p10)
 	end)));
 	table.insert(u11, v61);
 	table.insert(u11, v63);
-end);
-l__PlayerScripts__14.ChildRemoved:Connect(function(p14)
-	if p14.Name == "LocalScript" then
-		kick("tampering");
-	end;
-end);
-l__LocalScript__15.Changed:Connect(function()
-	if l__LocalScript__15.Disabled == true then
-		kick("disabled");
-	end;
-	if l__LocalScript__15.Parent ~= l__PlayerScripts__14 then
-		kick("trying 2 bypass");
-	end;
 end);
 l__ReplicatedStorage__4.DescendantRemoving:Connect(function(p15)
 	if p15.Parent:IsA("RemoteEvent") or p15.Parent.Name == "Events" then
@@ -348,48 +311,11 @@ end);
 if l__HB__2.Value == true then
 	coroutine.resume(updateServerHitboxes);
 end;
-for v64, v65 in pairs(l__Events__17:GetChildren()) do
-	local l__Name__17 = v65.Name;
-	v65.Changed:Connect(function()
-		if v65.Name ~= l__Name__17 then
-			kick("Illegal Property Change");
-		end;
-	end);
-	v65.ChildRemoved:Connect(function()
-		kick("Restricted Child Removal");
-	end);
-end;
-l__VIPRoom__11:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Size"):Connect(function()
-	if l__VIPRoom__11:WaitForChild("RoomCatch").Size ~= Vector3.new(71, 15, 71) then
-		kick("vip tamper");
-	end;
-end);
-l__VIPRoom__11:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Position"):Connect(function()
-	if l__VIPRoom__11:WaitForChild("RoomCatch").Position ~= Vector3.new(6.289, 32.16, 36.54) then
-		kick("vip tamper");
-	end;
-end);
-l__VIPRoom__11:WaitForChild("RoomCatch"):GetPropertyChangedSignal("Orientation"):Connect(function()
-	if l__VIPRoom__11:WaitForChild("RoomCatch").Orientation ~= Vector3.new(0, 0, 0) then
-		kick("vip tamper");
-	end;
-end);
 for v66, v67 in pairs(l__WaitingRoom__12:WaitForChild("VIPElevator"):WaitForChild("Block"):GetChildren()) do
 	v67.TextButton.Activated:Connect(function()
 		l__MarketplaceService__5:PromptGamePassPurchase(l__LocalPlayer__10, 10967481);
 	end);
 end;
-l__WaitingRoom__12.DescendantRemoving:Connect(function(p17)
-	if p17:IsA("BasePart") and p17.Anchored == true then
-		print(p17, p17.Anchored, p17.Parent);
-		kick("waitingroom removing part");
-	end;
-end);
-script.Changed:Connect(function()
-	if script.Parent ~= l__PlayerScripts__14 then
-		kick("Illegal Property Change");
-	end;
-end);
 local u18 = true;
 local u19 = {
 	Incoming = {}, 
@@ -515,7 +441,7 @@ function l__RemoteFunction__21.OnClientInvoke(...)
 	return (v73[2].Position - v73[3].Position).Magnitude;
 end;
 task.delay(10, function()
-	while true do
+	while true do wait()
 		local v75 = tick();
 		task.wait(1);
 		if tick() - v75 > 3 then
@@ -538,11 +464,9 @@ function setupChat()
 				local v80 = 0;
 				local v81 = {};
 				local v82, v83, v84 = string.gmatch(l__TextLabel__79.Text, ".");
-				while true do
+				while true do wait()
 					local v85 = v82(v83, v84);
-					if v85 then
-
-					else
+					if not v85 then
 						break;
 					end;
 					v84 = v85;
@@ -563,11 +487,9 @@ function setupChat()
 					local v86 = "";
 					local v87 = v80;
 					local v88, v89, v90 = pairs(v81);
-					while true do
+					while true do wait()
 						local v91, v92 = v88(v89, v90);
-						if v91 then
-
-						else
+						if not v91 then
 							break;
 						end;
 						v90 = v91;
@@ -587,11 +509,9 @@ function setupChat()
 				local v94 = 0;
 				local v95 = {};
 				local v96, v97, v98 = string.gmatch(l__TextLabel__79.Text, ".");
-				while true do
+				while true do wait()
 					local v99 = v96(v97, v98);
-					if v99 then
-
-					else
+					if not v99 then
 						break;
 					end;
 					v98 = v99;
@@ -612,11 +532,9 @@ function setupChat()
 					local v100 = "";
 					local v101 = v94;
 					local v102, v103, v104 = pairs(v95);
-					while true do
+					while true do wait()
 						local v105, v106 = v102(v103, v104);
-						if v105 then
-
-						else
+						if not v105 then
 							break;
 						end;
 						v104 = v105;
@@ -638,11 +556,9 @@ function setupChat()
 				local v110 = { "[", "]" };
 				local v111 = {};
 				local v112, v113, v114 = string.gmatch(l__Text__109, ".");
-				while true do
+				while true do wait()
 					local v115 = v112(v113, v114);
-					if v115 then
-
-					else
+					if not v115 then
 						break;
 					end;
 					v114 = v115;
@@ -659,8 +575,9 @@ function setupChat()
 						return;
 					end;
 					v116 = u28[math.random(1, #u28)];
+					local v117
 					if 0.6 < math.random() then
-						local v117 = string.format("<%s>%s</%s>", v116, string.gsub(l__Text__109, v111[math.random(1, #v111)], string.char(math.random(65, 122))), v116);
+						v117 = string.format("<%s>%s</%s>", v116, string.gsub(l__Text__109, v111[math.random(1, #v111)], string.char(math.random(65, 122))), v116);
 					else
 						v117 = string.format("<%s>%s</%s>", v116, l__Text__109, v116);
 					end;
@@ -678,11 +595,9 @@ function setupChat()
 				local v118 = 0;
 				local v119 = {};
 				local v120, v121, v122 = string.gmatch(l__TextLabel__79.Text, ".");
-				while true do
+				while true do wait()
 					local v123 = v120(v121, v122);
-					if v123 then
-
-					else
+					if not v123 then
 						break;
 					end;
 					v122 = v123;
@@ -703,11 +618,9 @@ function setupChat()
 					local v124 = "";
 					local v125 = v118;
 					local v126, v127, v128 = pairs(v119);
-					while true do
+					while true do wait()
 						local v129, v130 = v126(v127, v128);
-						if v129 then
-
-						else
+						if not v129 then
 							break;
 						end;
 						v128 = v129;
@@ -728,22 +641,18 @@ function setupChat()
 		if l__TextLabel__133 then
 			local v134 = l__TextLabel__133.Text;
 			local v135, v136, v137 = pairs({ "%[", "%]", " " });
-			while true do
+			while true do wait()
 				local v138, v139 = v135(v136, v137);
-				if v138 then
-
-				else
+				if not v138 then
 					break;
 				end;
 				v137 = v138;
 				v134 = v134:gsub(v139, "");			
 			end;
 			local v140, v141, v142 = pairs({ "Corrupted", "Rainbow", "Shadow", "TestTag", "1337" });
-			while true do
+			while true do wait()
 				local v143, v144 = v140(v141, v142);
-				if v143 then
-
-				else
+				if not v143 then
 					break;
 				end;
 				v142 = v143;
@@ -755,11 +664,9 @@ function setupChat()
 		return false, nil;
 	end;
 	local v145, v146, v147 = pairs(l__Scroller__76:GetChildren());
-	while true do
+	while true do wait()
 		local v148, v149 = v145(v146, v147);
-		if v148 then
-
-		else
+		if not v148 then
 			break;
 		end;
 		v147 = v148;
@@ -1034,11 +941,9 @@ function setupInfoGui()
 	local u42 = {};
 	local u43 = {};
 	local v176, v177, v178 = pairs(l__Sidebar__161:GetDescendants());
-	while true do
+	while true do wait()
 		local v179, v180 = v176(v177, v178);
-		if v179 then
-
-		else
+		if not v179 then
 			break;
 		end;
 		v178 = v179;
@@ -1047,11 +952,9 @@ function setupInfoGui()
 		end;	
 	end;
 	local v181, v182, v183 = pairs(l__Bottombar__160:GetDescendants());
-	while true do
+	while true do wait()
 		local v184, v185 = v181(v182, v183);
-		if v184 then
-
-		else
+		if not v184 then
 			break;
 		end;
 		v183 = v184;
@@ -1079,9 +982,7 @@ function setupInfoGui()
 		end;
 	end);
 	local function u45(p27)
-		if p27 == true then
-
-		else
+		if p27 ~= true then
 			local v189 = { l__TweenService__2:Create(l__MessageFrame__159, TweenInfo.new(0.25), {
 					BackgroundTransparency = 1
 				}), l__TweenService__2:Create(l__MessageFrame__159.Headshot, TweenInfo.new(0.25), {
@@ -1096,11 +997,9 @@ function setupInfoGui()
 					Transparency = 1
 				}) };
 			local v190, v191, v192 = pairs(v189);
-			while true do
+			while true do wait()
 				local v193, v194 = v190(v191, v192);
-				if v193 then
-
-				else
+				if not v193 then
 					break;
 				end;
 				v192 = v193;
@@ -1132,11 +1031,9 @@ function setupInfoGui()
 			}), l__TweenService__2:Create(l__MessageFrame__159.Username.UIStroke, TweenInfo.new(0.25), {
 				Transparency = 0
 			}) });
-		while true do
+		while true do wait()
 			local v198, v199 = v195(v196, v197);
-			if v198 then
-
-			else
+			if not v198 then
 				break;
 			end;
 			v197 = v198;
@@ -1163,11 +1060,9 @@ function setupInfoGui()
 			l__MessageFrame__159.Username.Text = string.format("Message from %s", (l__Players__3:GetNameFromUserIdAsync(v201)));
 			u45(true);
 			local v204, v205, v206 = pairs((string.split(v200[2], "")));
-			while true do
+			while true do wait()
 				local v207, v208 = v204(v205, v206);
-				if v207 then
-
-				else
+				if not v207 then
 					break;
 				end;
 				v206 = v207;
@@ -1200,11 +1095,9 @@ function setupInfoGui()
 		if u46 == false then
 			u46 = true;
 			local v210, v211, v212 = pairs(l__SoundService__8:GetDescendants());
-			while true do
+			while true do wait()
 				local v213, v214 = v210(v211, v212);
-				if v213 then
-
-				else
+				if not v213 then
 					break;
 				end;
 				v212 = v213;
@@ -1233,11 +1126,9 @@ function setupInfoGui()
 				u47 = nil;
 			end;
 			local v215, v216, v217 = pairs(l__SoundService__8:GetDescendants());
-			while true do
+			while true do wait()
 				local v218, v219 = v215(v216, v217);
-				if v218 then
-
-				else
+				if not v218 then
 					break;
 				end;
 				v217 = v218;
@@ -1348,22 +1239,18 @@ function setupInfoGui()
 		u41 = true;
 		if p30 then
 			local v220, v221, v222 = pairs(u42);
-			while true do
+			while not true do wait()
 				local v223, v224 = v220(v221, v222);
-				if v223 then
-
-				else
+				if not v223 then
 					break;
 				end;
 				v222 = v223;
 				v224:Disconnect();			
 			end;
 			local v225, v226, v227 = pairs(u43);
-			while true do
+			while true do wait()
 				local v228, v229 = v225(v226, v227);
-				if v228 then
-
-				else
+				if not v228 then
 					break;
 				end;
 				v227 = v228;
@@ -1375,11 +1262,9 @@ function setupInfoGui()
 			return;
 		end;
 		local v230, v231, v232 = pairs(l__Players__3:GetPlayers());
-		while true do
+		while true do wait()
 			local v233, v234 = v230(v231, v232);
-			if v233 then
-
-			else
+			if not v233 then
 				break;
 			end;
 			v232 = v233;
@@ -1476,11 +1361,9 @@ function setupInfoGui()
 	if u18 == true then
 		l__EnableShiftLock__162.Visible = false;
 		local v240, v241, v242 = pairs({ l__Mute__164, l__Playing__165, l__OpenLeader__166 });
-		while true do
+		while true do wait()
 			local v243, v244 = v240(v241, v242);
-			if v243 then
-
-			else
+			if not v243 then
 				break;
 			end;
 			v242 = v243;
@@ -1513,11 +1396,9 @@ function setupInfoGui()
 		if l__Workspace__9.CurrentCamera.ViewportSize.X < 1000 then
 			if l__Workspace__9.CurrentCamera.ViewportSize.Y < 1000 then
 				local v247, v248, v249 = pairs(l__Main__156:GetDescendants());
-				while true do
+				while true do wait()
 					local v250, v251 = v247(v248, v249);
-					if v250 then
-
-					else
+					if not v250 then
 						break;
 					end;
 					v249 = v250;
@@ -1546,11 +1427,9 @@ function setupInfoGui()
 				l__Sidebar__161.Position = UDim2.new(0, 10, 0.45, -l__Sidebar__161.Size.Y.Offset / 2);
 				l__Bottombar__160.Position = UDim2.new(0.5, -(l__Bottombar__160.Size.X.Offset / 2), 1, -l__Bottombar__160.Size.Y.Offset - 10);
 				local v252, v253, v254 = pairs(l__Bottombar__160:GetChildren());
-				while true do
+				while true do wait()
 					local v255, v256 = v252(v253, v254);
-					if v255 then
-
-					else
+					if not v255 then
 						break;
 					end;
 					v254 = v255;
@@ -1580,28 +1459,26 @@ local u53 = {
 	Mythical = Color3.fromRGB(140, 30, 255)
 };
 function setupInventoryGui()
-	local l__Main__257 = l__Inventory__34:WaitForChild("Main");
+	local __Main__ = l__Inventory__34:WaitForChild("Main");
 	local l__CaseFrame__258 = l__Inventory__34:WaitForChild("CaseFrame");
 	local l__RewardFrame__259 = l__Inventory__34:WaitForChild("RewardFrame");
 	local l__MessageFrame__260 = l__Inventory__34:WaitForChild("MessageFrame");
 	local l__OddsFrame__261 = l__Inventory__34:WaitForChild("OddsFrame");
 	local l__TradeFrame__262 = l__Inventory__34:WaitForChild("TradeFrame");
 	local l__TradeupFrame__263 = l__Inventory__34:WaitForChild("TradeupFrame");
-	local v264 = l__Main__257:WaitForChild("Copy"):Clone();
-	l__Main__257:WaitForChild("Copy"):Destroy();
-	local l__Close__265 = l__Main__257:WaitForChild("Close");
-	local l__Enable__266 = l__Main__257:WaitForChild("Enable");
+	local v264 = __Main__:WaitForChild("Copy"):Clone();
+	__Main__:WaitForChild("Copy"):Destroy();
+	local l__Close__265 = __Main__:WaitForChild("Close");
+	local l__Enable__266 = __Main__:WaitForChild("Enable");
 	local u54 = nil;
 	local u55 = nil;
 	local u56 = { "BombFlames", "ChatTags", "Swords", "Pets" };
 	local u57 = nil;
 	local function u58(p32)
 		local v267, v268, v269 = pairs(p32:GetChildren());
-		while true do
+		while true do wait()
 			local v270, v271 = v267(v268, v269);
-			if v270 then
-
-			else
+			if not v270 then
 				break;
 			end;
 			v269 = v270;
@@ -1655,11 +1532,9 @@ function setupInventoryGui()
 				local v274 = 0;
 				local v275 = {};
 				local v276, v277, v278 = string.gmatch(v272.ItemName.Text, ".");
-				while true do
+				while true do wait()
 					local v279 = v276(v277, v278);
-					if v279 then
-
-					else
+					if not v279 then
 						break;
 					end;
 					v278 = v279;
@@ -1685,11 +1560,9 @@ function setupInventoryGui()
 					local v280 = "";
 					local v281 = v274;
 					local v282, v283, v284 = pairs(v275);
-					while true do
+					while true do wait()
 						local v285, v286 = v282(v283, v284);
-						if v285 then
-
-						else
+						if not v285 then
 							break;
 						end;
 						v284 = v285;
@@ -1712,11 +1585,9 @@ function setupInventoryGui()
 						local v289 = 0;
 						local v290 = {};
 						local v291, v292, v293 = string.gmatch(v272.ItemLabel.Text, ".");
-						while true do
+						while true do wait()
 							local v294 = v291(v292, v293);
-							if v294 then
-
-							else
+							if not v294 then
 								break;
 							end;
 							v293 = v294;
@@ -1742,11 +1613,9 @@ function setupInventoryGui()
 							local v295 = "";
 							local v296 = v289;
 							local v297, v298, v299 = pairs(v290);
-							while true do
+							while true do wait()
 								local v300, v301 = v297(v298, v299);
-								if v300 then
-
-								else
+								if not v300 then
 									break;
 								end;
 								v299 = v300;
@@ -1767,11 +1636,9 @@ function setupInventoryGui()
 						local v304 = { "[", "]" };
 						local v305 = {};
 						local v306, v307, v308 = string.gmatch(l__Text__303, ".");
-						while true do
+						while true do wait()
 							local v309 = v306(v307, v308);
-							if v309 then
-
-							else
+							if not v309 then
 								break;
 							end;
 							v308 = v309;
@@ -1807,11 +1674,9 @@ function setupInventoryGui()
 						local v312 = 0;
 						local v313 = {};
 						local v314, v315, v316 = string.gmatch(v272.ItemLabel.Text, ".");
-						while true do
+						while true do wait()
 							local v317 = v314(v315, v316);
-							if v317 then
-
-							else
+							if not v317 then
 								break;
 							end;
 							v316 = v317;
@@ -1837,11 +1702,9 @@ function setupInventoryGui()
 							local v318 = "";
 							local v319 = v312;
 							local v320, v321, v322 = pairs(v313);
-							while true do
+							while true do wait()
 								local v323, v324 = v320(v321, v322);
-								if v323 then
-
-								else
+								if not v323 then
 									break;
 								end;
 								v322 = v323;
@@ -1862,11 +1725,9 @@ function setupInventoryGui()
 						local v327 = 0;
 						local v328 = {};
 						local v329, v330, v331 = string.gmatch(v272.ItemLabel.Text, ".");
-						while true do
+						while true do wait()
 							local v332 = v329(v330, v331);
-							if v332 then
-
-							else
+							if not v332 then
 								break;
 							end;
 							v331 = v332;
@@ -1892,11 +1753,9 @@ function setupInventoryGui()
 							local v333 = "";
 							local v334 = v327;
 							local v335, v336, v337 = pairs(v328);
-							while true do
+							while true do wait()
 								local v338, v339 = v335(v336, v337);
-								if v338 then
-
-								else
+								if not v338 then
 									break;
 								end;
 								v337 = v338;
@@ -1921,25 +1780,17 @@ function setupInventoryGui()
 					task.spawn(function()
 						local l__tick__341 = tick;
 						local l__Color3_fromHSV__342 = Color3.fromHSV;
-						while true do
-							if task.wait() then
-
-							else
+						while true do wait()
+							if not task.wait() then
 								break;
 							end;
-							if v272 ~= nil then
-
-							else
+							if v272 == nil then
 								break;
 							end;
-							if v272.Parent ~= nil then
-
-							else
+							if v272.Parent == nil then
 								break;
 							end;
-							if v272:FindFirstChild("ItemImage") ~= nil then
-
-							else
+							if v272:FindFirstChild("ItemImage") == nil then
 								break;
 							end;
 							v272.ItemImage.ImageColor3 = l__Color3_fromHSV__342(l__tick__341() % 1 / 1, 1, 1);						
@@ -1955,7 +1806,7 @@ function setupInventoryGui()
 		v272.Untradable.Visible = true;
 		return v272;
 	end;
-	local l__InventoryFrame__66 = l__Main__257:WaitForChild("InventoryFrame");
+	local l__InventoryFrame__66 = __Main__:WaitForChild("InventoryFrame");
 	local u67 = nil;
 	local u68 = {};
 	local u69 = require(l__Modules__16:WaitForChild("TradeupItemCheck"));
@@ -1974,11 +1825,9 @@ function setupInventoryGui()
 		end;
 		p39.Parent[p37].BorderSizePixel = 2;
 		local v343, v344, v345 = pairs(u56);
-		while true do
+		while true do wait()
 			local v346, v347 = v343(v344, v345);
-			if v346 then
-
-			else
+			if not v346 then
 				break;
 			end;
 			v345 = v346;
@@ -1991,11 +1840,9 @@ function setupInventoryGui()
 		p39.Placeholder.Text = "Loading...";
 		p39.Placeholder.Visible = true;
 		local v348, v349, v350 = pairs(u55[p37]);
-		while true do
+		while true do wait(0.05)
 			local v351, v352 = v348(v349, v350);
-			if v351 then
-
-			else
+			if not v351 then
 				break;
 			end;
 			local v353 = u59(p37, v352.Name, v352.Amount, v352.Serial);
@@ -2016,9 +1863,7 @@ function setupInventoryGui()
 							warn("Item failed to equip; you are either in cooldown or an error occured.");
 							return;
 						end;
-						if v355 == true then
-
-						else
+						if v355 == false then
 							if v355 == false then
 								u55[p37][v351].Equipped = false;
 								v353.Equipped.Visible = false;
@@ -2028,11 +1873,9 @@ function setupInventoryGui()
 						u55[p37][v351].Equipped = true;
 						v353.Equipped.Visible = true;
 						local v356, v357, v358 = pairs(p39.Items:GetDescendants());
-						while true do
+						while true do wait()
 							local v359, v360 = v356(v357, v358);
-							if v359 then
-
-							else
+							if not v359 then
 								break;
 							end;
 							v358 = v359;
@@ -2050,9 +1893,7 @@ function setupInventoryGui()
 								return;
 							end;
 						end;
-						if l__RemoteFunction__21:InvokeServer("ChangeOffer", "Add", u67, v353.Name) == true then
-
-						else
+						if l__RemoteFunction__21:InvokeServer("ChangeOffer", "Add", u67, v353.Name) ~= true then
 							warn("Item failed to add: " .. v352.Name);
 							return;
 						end;
@@ -2107,11 +1948,9 @@ function setupInventoryGui()
 							end;
 						end;
 						local v365, v366, v367 = pairs(u70);
-						while true do
+						while true do wait()
 							local v368, v369 = v365(v366, v367);
-							if v368 then
-
-							else
+							if not v368 then
 								break;
 							end;
 							v367 = v368;
@@ -2150,11 +1989,9 @@ function setupInventoryGui()
 									local v373 = u70[v372];
 									u70[v372] = "";
 									local v374, v375, v376 = pairs(u70);
-									while true do
+									while true do wait()
 										local v377, v378 = v374(v375, v376);
-										if v377 then
-
-										else
+										if not v377 then
 											break;
 										end;
 										v376 = v377;
@@ -2173,11 +2010,9 @@ function setupInventoryGui()
 									l__TradeupFrame__263.TradeupItems.Tradeup.TextButton.Text = "Tradeup";
 									u72 = false;
 									local v379, v380, v381 = pairs(l__TradeupFrame__263.TradeupItems:GetChildren());
-									while true do
+									while true do wait()
 										local v382, v383 = v379(v380, v381);
-										if v382 then
-
-										else
+										if not v382 then
 											break;
 										end;
 										v381 = v382;
@@ -2216,7 +2051,7 @@ function setupInventoryGui()
 			end;		
 		end;
 		if 0 < 0 then
-
+			-- pass
 		else
 			p39.Placeholder.Text = "No items were found in this category.";
 			return;
@@ -2225,7 +2060,7 @@ function setupInventoryGui()
 		p39.CanvasSize = UDim2.new(0, 0, 0, p39.Items:WaitForChild("UIGridLayout").AbsoluteContentSize.Y);
 	end;
 	local u78 = false;
-	local l__TradingFrame__79 = l__Main__257:WaitForChild("TradingFrame");
+	local l__TradingFrame__79 = __Main__:WaitForChild("TradingFrame");
 	local u80 = {};
 	local function u81(p40, p41)
 		local v387, v388 = l__RemoteFunction__21:InvokeServer("GetInventory", p40);
@@ -2236,11 +2071,9 @@ function setupInventoryGui()
 		if u54 then
 			if not u55 then
 				local v389, v390, v391 = pairs(u56);
-				while true do
+				while true do wait()
 					local v392, v393 = v389(v390, v391);
-					if v392 then
-
-					else
+					if not v392 then
 						break;
 					end;
 					v391 = v392;
@@ -2258,11 +2091,9 @@ function setupInventoryGui()
 			end;
 		else
 			v389, v390, v391 = pairs(u56);
-			while true do
+			while true do wait()
 				v392, v393 = v389(v390, v391);
-				if v392 then
-
-				else
+				if not v392 then
 					break;
 				end;
 				v391 = v392;
@@ -2279,20 +2110,16 @@ function setupInventoryGui()
 			end;
 		end;
 		local v394, v395, v396 = pairs(u55);
-		while true do
+		while true do wait()
 			local v397, v398 = v394(v395, v396);
-			if v397 then
-
-			else
+			if not v397 then
 				break;
 			end;
 			v396 = v397;
 			local v399, v400, v401 = pairs(v398);
-			while true do
+			while true do wait()
 				local v402, v403 = v399(v400, v401);
-				if v402 then
-
-				else
+				if not v402 then
 					break;
 				end;
 				v401 = v402;
@@ -2313,7 +2140,7 @@ function setupInventoryGui()
 		if u19.Outgoing[p42] then
 			u19.Outgoing[p42] = nil;
 		end;
-		l__Main__257.Visible = false;
+		__Main__.Visible = false;
 		l__TradeFrame__262.Confirmation.Text = string.format("%s has accepted the trade.", p42.Name);
 		l__TradeFrame__262.PlayerOfferLabel.Text = string.format("%s's Offer", p42.Name);
 		l__TradeFrame__262.Title.Text = string.format("Trading with: %s", p42.Name);
@@ -2460,8 +2287,6 @@ function setupInventoryGui()
 		l__RewardFrame__259.ItemFrame.ItemName.TextColor3 = u53[p48.Rarity];
 		if v417 == "ChatTags" then
 			l__RewardFrame__259.ItemFrame.ItemImage.Visible = false;
-			l__RewardFrame__259.ItemFrame.ItemLabel.Text = string.format("[%s]", v24[v418].TagText);
-			l__RewardFrame__259.ItemFrame.ItemLabel.TextColor3 = v24[v418].TagColor;
 			l__RewardFrame__259.ItemFrame.ItemLabel.Visible = true;
 		else
 			l__RewardFrame__259.ItemFrame.ItemLabel.Visible = false;
@@ -2478,13 +2303,13 @@ function setupInventoryGui()
 		v419.PlayOnRemove = true;
 		v419:Destroy();
 	end;
-	l__Main__257.Tradeup.MouseButton1Down:Connect(function()
-		l__Main__257.Visible = false;
+	__Main__.Tradeup.MouseButton1Down:Connect(function()
+		__Main__.Visible = false;
 		l__TradeupFrame__263.Visible = true;
 	end);
 	l__Close__265.MouseButton1Down:Connect(function()
 		playSound("rbxassetid://140910211", 0.5);
-		l__Main__257.Visible = false;
+		__Main__.Visible = false;
 		l__MessageFrame__260.Visible = false;
 	end);
 	l__Enable__266.MouseButton1Down:Connect(function()
@@ -2499,11 +2324,9 @@ function setupInventoryGui()
 	end);
 	local function u84()
 		local v421, v422, v423 = pairs(l__Players__3:GetPlayers());
-		while true do
+		while true do wait()
 			local v424, v425 = v421(v422, v423);
-			if v424 then
-
-			else
+			if not v424 then
 				break;
 			end;
 			v423 = v424;
@@ -2566,11 +2389,9 @@ function setupInventoryGui()
 					u81(v425, l__InventoryFrame__66);
 					v426.Load.Text = "Close Inventory";
 					local v429, v430, v431 = pairs(l__TradingFrame__79:GetChildren());
-					while true do
+					while true do wait()
 						local v432, v433 = v429(v430, v431);
-						if v432 then
-
-						else
+						if not v432 then
 							break;
 						end;
 						v431 = v432;
@@ -2653,11 +2474,9 @@ function setupInventoryGui()
 	local function u87(p49)
 		u58(p49.Items);
 		local v436, v437, v438 = pairs(l__TradingFrame__79:GetChildren());
-		while true do
+		while true do wait()
 			local v439, v440 = v436(v437, v438);
-			if v439 then
-
-			else
+			if not v439 then
 				break;
 			end;
 			v438 = v439;
@@ -2666,11 +2485,9 @@ function setupInventoryGui()
 			end;		
 		end;
 		local v441, v442, v443 = pairs(u56);
-		while true do
+		while true do wait()
 			local v444, v445 = v441(v442, v443);
-			if v444 then
-
-			else
+			if not v444 then
 				break;
 			end;
 			v443 = v444;
@@ -2684,11 +2501,9 @@ function setupInventoryGui()
 		u55 = nil;
 		u54 = nil;
 	end;
-	l__Main__257:GetPropertyChangedSignal("Visible"):Connect(function()
-		if l__Main__257.Visible == true then
-
-		else
-			if l__Main__257.Visible == false then
+	__Main__:GetPropertyChangedSignal("Visible"):Connect(function()
+		if __Main__.Visible == false then
+			if __Main__.Visible == false then
 				u87(l__InventoryFrame__66);
 			end;
 			return;
@@ -2719,11 +2534,9 @@ function setupInventoryGui()
 			return;
 		end;
 		local v447, v448, v449 = pairs(v446);
-		while true do
+		while true do wait()
 			local v450, v451 = v447(v448, v449);
-			if v450 then
-
-			else
+			if not v450 then
 				break;
 			end;
 			v449 = v450;
@@ -2734,11 +2547,9 @@ function setupInventoryGui()
 			v454.Chance.Text = string.format("%.2f%%", v451);
 			v454.ItemName.Text = v453;
 			local v455, v456, v457 = pairs(v454:GetChildren());
-			while true do
+			while true do wait()
 				local v458, v459 = v455(v456, v457);
-				if v458 then
-
-				else
+				if not v458 then
 					break;
 				end;
 				v457 = v458;
@@ -2748,11 +2559,9 @@ function setupInventoryGui()
 		end;
 		l__OddsFrame__261.Odds.Placeholder.Visible = false;
 		local v460, v461, v462 = pairs(l__OddsFrame__261.Odds.Items:GetChildren());
-		while true do
+		while true do wait()
 			local v463, v464 = v460(v461, v462);
-			if v463 then
-
-			else
+			if not v463 then
 				break;
 			end;
 			v462 = v463;
@@ -2794,7 +2603,7 @@ function setupInventoryGui()
 					l__MessageFrame__260.Visible = false;
 				end;
 			end);
-			l__Main__257.Visible = true;
+			__Main__.Visible = true;
 		end;
 	end);
 	l__TradeFrame__262.Accept.MouseButton1Down:Connect(function()
@@ -2829,11 +2638,9 @@ function setupInventoryGui()
 				u70 = { "", "", "", "", "", "", "", "", "", "" };
 				u87(l__TradeupFrame__263.LocalInventory);
 				local v465, v466, v467 = pairs(l__TradeupFrame__263.TradeupItems:GetChildren());
-				while true do
+				while true do wait()
 					local v468, v469 = v465(v466, v467);
-					if v468 then
-
-					else
+					if not v468 then
 						break;
 					end;
 					v467 = v468;
@@ -2850,7 +2657,7 @@ function setupInventoryGui()
 	end);
 	l__TradeupFrame__263.Close.MouseButton1Down:Connect(function()
 		l__TradeupFrame__263.Visible = false;
-		l__Main__257.Visible = true;
+		__Main__.Visible = true;
 	end);
 	local function u90(p50, p51)
 		if l__LocalPlayer__10.Trading.Value == true then
@@ -2859,7 +2666,7 @@ function setupInventoryGui()
 		local v470, v471 = getItemInfo(p51.Name);
 		u58(l__CaseFrame__258.CaseScroll);
 		local v472 = 1 - 1;
-		while true do
+		while true do wait()
 			if v472 == 57 then
 				local v473 = p51.Rarity;
 				local v474 = v470;
@@ -2888,9 +2695,9 @@ function setupInventoryGui()
 			v478.Visible = true;
 			if 0 <= 1 then
 				if v472 < 61 then
-
+					-- pass
 				else
-					break;
+					break
 				end;
 			elseif 61 < v472 then
 
@@ -2899,7 +2706,7 @@ function setupInventoryGui()
 			end;
 			v472 = v472 + 1;		
 		end;
-		l__Main__257.Visible = false;
+		__Main__.Visible = false;
 		l__CaseFrame__258.Visible = true;
 		local u91 = false;
 		local u92 = math.random(37, 117);
@@ -2991,9 +2798,7 @@ function setupInventoryGui()
 		end;
 		u71 = true;
 		local v481, v482, v483 = l__RemoteFunction__21:InvokeServer("Tradeup", u70);
-		if v481 then
-
-		else
+		if not v481 then
 			l__TradeupFrame__263.TradeupItems.Tradeup.TextButton.Text = "Error";
 			task.delay(3, function()
 				u71 = false;
@@ -3017,15 +2822,13 @@ function setupInventoryGui()
 		l__OddsFrame__261.Visible = true;
 	end);
 	local v484, v485, v486 = pairs(u56);
-	while true do
+	while true do wait()
 		local v487, v488 = v484(v485, v486);
-		if v487 then
-
-		else
+		if not v487 then
 			break;
 		end;
 		v486 = v487;
-		l__Main__257[v488].MouseButton1Down:Connect(function()
+		__Main__[v488].MouseButton1Down:Connect(function()
 			if u57 ~= v488 then
 				if u54 == true then
 					u58(l__InventoryFrame__66.Items);
@@ -3053,9 +2856,7 @@ function setupInventoryGui()
 	l__RemoteEvent__20.OnClientEvent:Connect(function(...)
 		local v489 = { ... };
 		local v490 = v489[1];
-		if v490 == "InitiateTrade" then
-
-		else
+		if v490 ~= "InitiateTrade" then
 			if v490 == "FinalizeTrade" then
 				l__MessageFrame__260.Message.Text = v489[2];
 				l__TradeFrame__262.Visible = false;
@@ -3082,8 +2883,8 @@ function setupInventoryGui()
 	if u18 == false then
 		if l__Workspace__9.CurrentCamera.ViewportSize.X < 1000 then
 			if l__Workspace__9.CurrentCamera.ViewportSize.Y < 1000 then
-				l__Main__257.Size = UDim2.new(0, l__Main__257.Size.X.Offset * 0.5, 0, l__Main__257.Size.Y.Offset * 0.5);
-				l__Main__257.Position = UDim2.new(0.5, -l__Main__257.Size.X.Offset / 2, 0.5, -l__Main__257.Size.Y.Offset / 2);
+				__Main__.Size = UDim2.new(0, __Main__.Size.X.Offset * 0.5, 0, __Main__.Size.Y.Offset * 0.5);
+				__Main__.Position = UDim2.new(0.5, -__Main__.Size.X.Offset / 2, 0.5, -__Main__.Size.Y.Offset / 2);
 				v264.Item.ItemLabel.TextSize = 10;
 				l__InventoryFrame__66.Items.UIGridLayout.CellSize = UDim2.new(0, l__InventoryFrame__66.Items.UIGridLayout.CellSize.X.Offset * 0.5, 0, l__InventoryFrame__66.Items.UIGridLayout.CellSize.Y.Offset * 0.5);
 				l__InventoryFrame__66.Items.UIGridLayout.CellPadding = UDim2.new(0, 3, 0, 3);
@@ -3133,11 +2934,9 @@ function setupLeaderboardGui()
 	local l__Items__97 = l__LeaderboardFrame__497:WaitForChild("Items");
 	local function u98()
 		local v499, v500, v501 = pairs(l__Items__97:GetChildren());
-		while true do
+		while true do wait()
 			local v502, v503 = v499(v500, v501);
-			if v502 then
-
-			else
+			if not v502 then
 				break;
 			end;
 			v501 = v502;
@@ -3150,11 +2949,9 @@ function setupLeaderboardGui()
 	local u100 = "Level";
 	local function v504(p54)
 		local v505, v506, v507 = pairs(u96);
-		while true do
+		while true do wait()
 			local v508, v509 = v505(v506, v507);
-			if v508 then
-
-			else
+			if not v508 then
 				break;
 			end;
 			v507 = v508;
@@ -3164,16 +2961,12 @@ function setupLeaderboardGui()
 		l__Placeholder__99.Visible = true;
 		u100 = p54;
 		local v510, v511, v512 = pairs(l__Players__3:GetPlayers());
-		while true do
+		while true do wait()
 			local v513, v514 = v510(v511, v512);
-			if v513 then
-
-			else
+			if not v513 then
 				break;
 			end;
-			if u100 == p54 then
-
-			else
+			if u100 ~= p54 then
 				break;
 			end;
 			if p54 == "Ping" then
@@ -3212,11 +3005,9 @@ function setupLeaderboardGui()
 		end;
 		l__Placeholder__99.Visible = false;
 		local v520, v521, v522 = pairs(l__Items__97:GetChildren());
-		while true do
+		while true do wait()
 			local v523, v524 = v520(v521, v522);
-			if v523 then
-
-			else
+			if not v523 then
 				break;
 			end;
 			v522 = v523;
@@ -3231,22 +3022,18 @@ function setupLeaderboardGui()
 		l__Main__495.Visible = false;
 	end);
 	local v525, v526, v527 = pairs(v498);
-	while true do
+	while true do wait()
 		local v528, v529 = v525(v526, v527);
-		if v528 then
-
-		else
+		if not v528 then
 			break;
 		end;
 		v527 = v528;
 		l__Main__495[v529].MouseButton1Down:Connect(function()
 			l__Main__495[v529].BorderSizePixel = 2;
 			local v530, v531, v532 = pairs(v498);
-			while true do
+			while true do wait()
 				local v533, v534 = v530(v531, v532);
-				if v533 then
-
-				else
+				if not v533 then
 					break;
 				end;
 				v532 = v533;
@@ -3293,11 +3080,9 @@ function setupShopGui()
 	local l__ShopItems__101 = u50.ShopItems;
 	local function u102(p55)
 		local v546, v547, v548 = pairs(p55:GetChildren());
-		while true do
+		while true do wait()
 			local v549, v550 = v546(v547, v548);
-			if v549 then
-
-			else
+			if not v549 then
 				break;
 			end;
 			v548 = v549;
@@ -3355,7 +3140,7 @@ function setupShopGui()
 		local v555, v556 = getItemInfo(p58.Name);
 		u102(l__CaseFrame__535.CaseScroll);
 		local v557 = 1 - 1;
-		while true do
+		while true do wait()
 			local v558 = nil;
 			local v559 = math.random();
 			if u21 == true then
@@ -3577,14 +3362,14 @@ function setupShopGui()
 			v564.Visible = true;
 			if 0 <= 1 then
 				if v557 < 61 then
-
+					--pass
 				else
-					break;
+					break
 				end;
 			elseif 61 < v557 then
-
+				--pass
 			else
-				break;
+				break
 			end;
 			v557 = v557 + 1;		
 		end;
@@ -3691,11 +3476,9 @@ function setupShopGui()
 				l__Settings__110.Visible = false;
 			end;
 			local v567, v568, v569 = pairs(l__Items__111:GetChildren());
-			while true do
+			while true do wait()
 				local v570, v571 = v567(v568, v569);
-				if v570 then
-
-				else
+				if not v570 then
 					break;
 				end;
 				v569 = v570;
@@ -3729,11 +3512,9 @@ function setupShopGui()
 		l__Purchase__106.Visible = true;
 		p60.Selected.Visible = true;
 		local v573, v574, v575 = pairs(l__Items__111:GetChildren());
-		while true do
+		while true do wait()
 			local v576, v577 = v573(v574, v575);
-			if v576 then
-
-			else
+			if not v576 then
 				break;
 			end;
 			v575 = v576;
@@ -3962,11 +3743,9 @@ function setupShopGui()
 		l__GiftFrame__538.Headshot.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png";
 		l__GiftFrame__538.Username.Text = "No-one!";
 		local v584, v585, v586 = pairs(l__Players__3:GetPlayers());
-		while true do
+		while true do wait()
 			local v587, v588 = v584(v585, v586);
-			if v587 then
-
-			else
+			if not v587 then
 				break;
 			end;
 			v586 = v587;
@@ -3983,11 +3762,9 @@ function setupShopGui()
 					l__GiftFrame__538.Username.Text = v588.Name;
 					v589.Button.TextColor3 = Color3.new(0, 255, 0);
 					local v592, v593, v594 = pairs(l__GiftFrame__538.Players:GetChildren());
-					while true do
+					while true do wait()
 						local v595, v596 = v592(v593, v594);
-						if v595 then
-
-						else
+						if not v595 then
 							break;
 						end;
 						v594 = v595;
@@ -4010,20 +3787,16 @@ function setupShopGui()
 	local function u136(p65)
 		u102(l__PreviewFrame__539.Items);
 		local v597, v598, v599 = pairs(l__ShopItems__101.Cases[p65].CaseItems);
-		while true do
+		while true do wait()
 			local v600, v601 = v597(v598, v599);
-			if v600 then
-
-			else
+			if not v600 then
 				break;
 			end;
 			v599 = v600;
 			local v602, v603, v604 = pairs(v601);
-			while true do
+			while true do wait()
 				local v605, v606 = v602(v603, v604);
-				if v605 then
-
-				else
+				if not v605 then
 					break;
 				end;
 				local v607, v608 = getItemInfo(v606);
@@ -4082,11 +3855,9 @@ function setupShopGui()
 		l__SettingsFrame__540.MinigameImage.Image = u52.Minigames[p66:lower()];
 		l__SettingsFrame__540.MinigameName.Text = p66;
 		local v611, v612, v613 = pairs(v610.Maps);
-		while true do
+		while true do wait()
 			local v614, v615 = v611(v612, v613);
-			if v614 then
-
-			else
+			if not v614 then
 				break;
 			end;
 			v613 = v614;
@@ -4101,11 +3872,9 @@ function setupShopGui()
 				u123 = v615;
 				v616.Button.TextColor3 = Color3.new(0, 255, 0);
 				local v617, v618, v619 = pairs(l__SettingsFrame__540.Maps:GetChildren());
-				while true do
+				while true do wait()
 					local v620, v621 = v617(v618, v619);
-					if v620 then
-
-					else
+					if not v620 then
 						break;
 					end;
 					v619 = v620;
@@ -4118,11 +3887,9 @@ function setupShopGui()
 			end);		
 		end;
 		local v622, v623, v624 = pairs(v610.Modes);
-		while true do
+		while true do wait()
 			local v625, v626 = v622(v623, v624);
-			if v625 then
-
-			else
+			if not v625 then
 				break;
 			end;
 			v624 = v625;
@@ -4137,11 +3904,9 @@ function setupShopGui()
 				u124 = v626;
 				v627.Button.TextColor3 = Color3.new(0, 255, 0);
 				local v628, v629, v630 = pairs(l__SettingsFrame__540.Modes:GetChildren());
-				while true do
+				while true do wait()
 					local v631, v632 = v628(v629, v630);
-					if v631 then
-
-					else
+					if not v631 then
 						break;
 					end;
 					v630 = v631;
@@ -4165,11 +3930,9 @@ function setupShopGui()
 		u102(l__ShopFrame__543.Items);
 		l__Main__537[p67].BorderSizePixel = 2;
 		local v633, v634, v635 = pairs(u126);
-		while true do
+		while true do wait()
 			local v636, v637 = v633(v634, v635);
-			if v636 then
-
-			else
+			if not v636 then
 				break;
 			end;
 			v635 = v636;
@@ -4180,11 +3943,9 @@ function setupShopGui()
 		l__Placeholder__127.Visible = true;
 		u112 = p67;
 		local v638, v639, v640 = pairs(l__ShopItems__101[p67]);
-		while true do
+		while true do wait()
 			local v641, v642 = v638(v639, v640);
-			if v641 then
-
-			else
+			if not v641 then
 				break;
 			end;
 			local v643 = v542.ShopItem:Clone();
@@ -4435,11 +4196,9 @@ function setupShopGui()
 		end;
 	end);
 	local v650, v651, v652 = pairs(u126);
-	while true do
+	while true do wait()
 		local v653, v654 = v650(v651, v652);
-		if v653 then
-
-		else
+		if not v653 then
 			break;
 		end;
 		v652 = v653;

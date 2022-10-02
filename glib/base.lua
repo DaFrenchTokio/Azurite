@@ -602,11 +602,7 @@ function lib:Main()
 		}
 		game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(key)
             if key:lower() == mod.key then
-                if mn.Base.Visible == false then
-                    mn.Base.Visible = true
-				elseif mn.Base.Visible == true then
-                    mn.Base.Visible = false
-                end
+				mn.Base.Visible = not mn.Base.Visible
             end
         end)
 		function mod:Set(v)

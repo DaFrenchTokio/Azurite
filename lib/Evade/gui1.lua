@@ -70,7 +70,7 @@ Profil.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Profil.BackgroundTransparency = 1.000
 Profil.Position = UDim2.new(0.200000003, 0, 0.227450997, 0)
 Profil.Size = UDim2.new(0, 150, 0, 150)
-Profil.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
+Profil.Image = game:GetService("Players"):GetUserThumbnailAsync(game.Players.LocalPlayer.UserId, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size420x420)
 Profil.ImageTransparency = 1.000
 
 st_2.CornerRadius = UDim.new(0, 100)

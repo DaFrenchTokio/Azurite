@@ -1,29 +1,5 @@
 local a = {}
 function a:GetExploit()
-	if is_sirhurt_closure then
-		return "Sirhurt"
-	elseif pebc_execute then
-		return "ProtoSmasher"
-	elseif syn then
-		return "Synapse X"
-	elseif secure_load then
-		return "Sentinel"
-	elseif KRNL_LOADED and not is_oxygen_function() then
-		return "Krnl"
-	elseif getexecutorname() and not fluxus then
-		return "Scriptware"
-	elseif is_oxygen_function() then
-		return "Oxygen U"
-	elseif identifyexecutor() then
-		return "Arceus X"
-	elseif WRD then
-		return "WeAreDevs Api"
-	elseif fluxus then
-		return "Fluxus"
-	elseif IsElectron then
-		return "Electron"
-	else
-		return "None"
-	end
+	local api = is_sirhurt_closure and "Sirhurt" or pebc_execute and "ProtoSmasher" or syn and "Synapse X" or secure_load and "Sentinel" or is_oxygen_function() and "Oxygen U" or KRNL_LOADED and "Krnl" or fluxus and "Fluxus" or getexecutorname() and "ScriptWare" or identifyexecutor() and "Arceus X" or WRD and "WeAreDevs Api" or IsElectron and "Electron" or "None" 
 end
 return a

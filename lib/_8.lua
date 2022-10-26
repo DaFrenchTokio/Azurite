@@ -1,29 +1,22 @@
 local a = {}
 function a:GetExploit()
-	if is_sirhurt_closure then
-		return "Sirhurt"
-	elseif pebc_execute then
-		return "ProtoSmasher"
-	elseif syn then
-		return "Synapse X"
-	elseif secure_load then
-		return "Sentinel"
-	elseif KRNL_LOADED and not is_oxygen_function() then
-		return "Krnl"
-	elseif getexecutorname() and not fluxus then
-		return "Scriptware"
-	elseif is_oxygen_function() then
-		return "Oxygen U"
-	elseif identifyexecutor() then
-		return "Arceus X"
-	elseif WRD then
-		return "WeAreDevs Api"
-	elseif fluxus then
-		return "Fluxus"
-	elseif IsElectron then
-		return "Electron"
-	else
-		return "None"
-	end
+    local exploit =
+      (syn and not is_sirhurt_closure and not pebc_execute and "Synapse X") or
+      (secure_load and "Sentinel") or
+      (is_sirhurt_closure and "Sirhurt") or
+      (pebc_execute and "ProtoSmasher") or
+      (OXYGEN_LOADED and "Oxygen U") or
+      (KRNL_LOADED and "Krnl") or
+      (WrapGlobal and "WeAreDevs") or
+      (isvm and "Proxo") or
+      (shadow_env and "Shadow") or
+      (jit and "EasyExploits") or
+      (getscriptenvs and "Calamari") or
+      (unit and not syn and "Unit") or
+      (IsElectron and "Electron") or
+      (getexecutorname() and not fluxus and "Scriptware") or
+      (fluxus and "Fluxus") or
+      (identifyexecutor() and "Arceus X") or
+      ("None")
+    return exploit
 end
-return a

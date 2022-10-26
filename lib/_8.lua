@@ -20,3 +20,4 @@ function a:GetExploit()
       ("None")
     return exploit
 end
+return a

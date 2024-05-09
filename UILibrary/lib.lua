@@ -10,7 +10,7 @@ function __UI__:Notification(a)pcall(function()game.StarterGui:SetCore("SendNoti
 function __UI__:GetTime()local a=os.date("*t")["hour"]local b=os.date("*t")if a<12 or a==24 then return("%02d:%02d"):format((b.hour%24-1)%12+1,b.min)..'AM'else return("%02d:%02d"):format((b.hour%24-1)%12+1,b.min)..'PM'end end
 function __UI__:FileTime()local a=os.date("*t")["hour"]local b=os.date("*t")if a<12 or a==24 then return("%02d_%02d"):format((b.hour%24-1)%12+1,b.min)..'AM'else return("%02d_%02d"):format((b.hour%24-1)%12+1,b.min)..'PM'end end
 function __UI__:Copy(a)local b=setclipboard or toclipboard or set_clipboard or Clipboard and Clipboard.set;if b~=nil then b(tostring(a))__UI__:Notification("Copied to clipboard")else __UI__:Notification("Your Exploit Doesn't Support Clipboard")game.StarterGui:SetCore("SendNotification",{Title="Azurite",Text="Copy This : "..tostring(a),Icon="rbxthumb://type=Asset&id=10912483183&w=150&h=150",Duration=10000})end end
-function __UI__:BooleanToString(_s) if string.find(_s,"false") ~= nil then return false elseif string.find(_s,"true") ~= nil then return true else return error('Convert Boolean -> '..tostring(_s)) end end
+function __UI__:BooleanToString(_s) if string.find(_s,"false", 1, true) ~= nil then return false elseif string.find(_s,"true", 1, true) ~= nil then return true else return error('Convert Boolean -> '..tostring(_s)) end end
 function __UI__:Page()
 	_G.AzuriteUISettings = {}
 
@@ -111,7 +111,6 @@ function __UI__:Page()
 		if ElementsHolder.Import == true then 
 			ElementsHolder.IsLoadingElement = true 
 			if readfile and isfile then
-				print(ElementsHolder.IsThereFile)
 				if ElementsHolder.IsThereFile == true then 
 					local file = readfile(__UI__["#File"])
 					local lines = {}
@@ -119,17 +118,17 @@ function __UI__:Page()
 						table.insert(lines,v)
 					end
 					for i,v in next, lines do
-				    	local find = string.find(v, ElementID)
+				    	local find = string.find(v, ElementID, 1, true)
 						if find then
 							ltable = string.split(v,"|")
 							local Element = tostring(ltable[#ltable])
-							if string.find(ltable[2],"Toggle") ~= nil then
+							if string.find(ltable[2],"Toggle", 1, true) ~= nil then
 								ElementsHolder.IsLoadingElement = false
 								return __UI__:BooleanToString(Element)
-							elseif string.find(ltable[2],"TextBox") ~= nil then
+							elseif string.find(ltable[2],"TextBox", 1, true) ~= nil then
 								ElementsHolder.IsLoadingElement = false
 								return string.gsub(Element, "^%s+", "")
-							elseif string.find(ltable[2],"Slider") ~= nil then
+							elseif string.find(ltable[2],"Slider", 1, true) ~= nil then
 								ElementsHolder.IsLoadingElement = false 
 								return tonumber(Element)
 							else
@@ -139,14 +138,12 @@ function __UI__:Page()
 							end
 						end
 				    end
-					__UI__._Debug('ERROR | ReturnConfig | '..tostring(#lines)..' | Not finding any lines returning for : ' .. tostring(ElementID))
+					__UI__._Debug('ERROR | ReturnConfig | '..tostring(#lines)..' | Not finding any lines returning for ['..tostring(ElementID)..']')
 				else 
-					__UI__._Debug('no file')
 					ElementsHolder.IsLoadingElement = false 
 					return OriginValue 
 				end 
 			else 
-				__UI__._Debug('no readfile and isfile')
 				ElementsHolder.IsLoadingElement = false 
 				return OriginValue 
 			end 
@@ -155,24 +152,39 @@ function __UI__:Page()
 			return OriginValue 
 		end 
 	end
-	function __UI__.AddConfig(elementID, value) local foundIndex = nil for i, v in ipairs(_G.ccc_ccc_ccc_ccc_ccc) do if #_G.ccc_ccc_ccc_ccc_ccc ~= 0 then if string.match(v[1], elementID) then foundIndex = i break end end end if foundIndex then local ovalue = _G.ccc_ccc_ccc_ccc_ccc[foundIndex][2] _G.ccc_ccc_ccc_ccc_ccc[foundIndex] = {elementID,value} else table.insert(_G.ccc_ccc_ccc_ccc_ccc, {elementID,value}) end end
+	function __UI__.AddConfig(elementID, value)
+	    local foundIndex = nil
+	    for i, v in ipairs(_G.ccc_ccc_ccc_ccc_ccc) do
+	        if #_G.ccc_ccc_ccc_ccc_ccc ~= 0 then
+	            if string.find(v[1], elementID, 1, true) then
+	                foundIndex = i
+	                break
+	            end
+	        end
+	    end
+	    if foundIndex then
+	        local ovalue = _G.ccc_ccc_ccc_ccc_ccc[foundIndex][2]
+	        _G.ccc_ccc_ccc_ccc_ccc[foundIndex] = {elementID, value}
+	    else
+	        table.insert(_G.ccc_ccc_ccc_ccc_ccc, {elementID, value})
+	    end
+	end
 	function __UI__.ReplaceValue(OldElementID, NewElementID)
 	    repeat task.wait() until ElementsHolder.IsReplacingValue == false
-	    if ElementsHolder.Import == true and ElementsHolder.IsReplacingValue == false then
+	    if ElementsHolder.IsReplacingValue == false then
 	        ElementsHolder.IsReplacingValue = true
-	        if (readfile and isfile and ElementsHolder.IsThereFile) then
+	        if (readfile and isfile) then
 	            local file = readfile(__UI__["#File"])
                 local lines = {}
                 for line in file:gmatch("[^\n]+") do
                     local find = string.find(line, OldElementID, 1, true)
                     if find then
                         table.insert(lines, NewElementID)
-                        __UI__._Debug('found new')
                     else
                     	table.insert(lines, line)
                     end
                 end
-                __UI__._Debug(tostring(__UI__["#File"]) .. " | Saved Config")
+                __UI__.Notification(tostring(__UI__["#File"]) .. " | Saved Config")
                 writefile(__UI__["#File"], table.concat(lines, "\n"))
                 ElementsHolder.IsReplacingValue = false
 	        end
@@ -1216,8 +1228,11 @@ function __UI__:Page()
 				SliderBarValue.Name = __UI__.RandomName("SliderBarValue")
 				SliderBarValue.Parent = SliderHolder
 				SliderBarValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-				SliderBarValue.Size = UDim2.new(0, ((100 / tonumber(__MaxValue__)) * _xET.Value), 0, 10)
-
+				if __Value__ == __MinValue__ then
+					SliderBarValue.Size = UDim2.new(0, 0, 0, 10)
+				else
+					SliderBarValue.Size = UDim2.new(0, ((100 / tonumber(__MaxValue__)) * _xET.Value), 0, 10)
+				end
 
 				UICorner_3.CornerRadius = UDim.new(0, 100)
 				UICorner_3.Parent = SliderBarValue
